@@ -9,6 +9,7 @@
     "backend:build": "npx babel backend-src -d dist",
     "backend:dev": "npx nodemon --exec babel-node backend-src/index.js",
     "frontend:build": "npx webpack --progress --config webpack.config.js",
+    "frontend:dev": "npx webpack --progress --watch --config webpack.config.js",
     "build": "npm run clean && npm run backend:build && npm run frontend:build",
     "build:prod": "npm run clean && NODE_ENV=production npm run backend:build && NODE_ENV=production npm run frontend:build",
     "start": "node dist/index.js"
@@ -30,6 +31,8 @@
     "@babel/preset-env": "^7.9.5",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.5.2",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
@@ -37,6 +40,7 @@
     "vue": "^2.6.11",
     "vue-loader": "^15.9.1",
     "vue-router": "^3.1.6",
+    "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
@@ -44,6 +48,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "express": "^4.17.1",
+    "nes.css": "^2.3.0",
     "sequelize": "^5.21.6",
     "sqlite3": "^4.1.1"
   }

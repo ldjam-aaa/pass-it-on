@@ -32,7 +32,15 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/
-            }
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]?[hash]',
+                    outputPath: 'img',
+                },
+            },
         ]
     },
     plugins: [
@@ -48,6 +56,9 @@ module.exports = {
             hash: true,
             template: 'frontend-src/index.ejs',
             inject: false,
+            meta: {
+                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+            },
         }),
     ],
     resolve: {
