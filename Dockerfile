@@ -1,4 +1,4 @@
-FROM node:13
+FROM node:13-alpine
 
 LABEL maintainer="The Pass It On Authors"
 
