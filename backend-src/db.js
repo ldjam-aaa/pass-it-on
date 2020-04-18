@@ -1,6 +1,9 @@
-import { Sequelize } from 'sequelize'
+import { Sequelize, DataTypes } from 'sequelize'
 
 import { v4 as uuid } from 'uuid';
+
+// Constants object to be exported
+const CONSTANTS = {};
 
 // init sqlite database
 const sequelize = new Sequelize({
@@ -10,28 +13,45 @@ const sequelize = new Sequelize({
 
 // define all the model schema
 const User = sequelize.define('user', {
-  username: Sequelize.STRING,
+  username: DataTypes.STRING,
   score: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     defaultValue: 0,
   },
   uuid: {
     primaryKey: true,
-    type: Sequelize.UUID,
+    type: DataTypes.UUID,
   }
 });
 
 User.beforeCreate(user => user.uuid = uuid());
 
-const Game = sequelize.define('game', {
+CONSTANTS.GAME = {
+  STATE: {
+    STARTED: 2,
+    ENDED: 3,
+  }
+};
 
+const Game = sequelize.define('game', {
+  state: {
+    type: DataTypes.INTEGER,
+    validate: {
+      is: Object.values(CONSTANTS.GAME.STATE)
+    }
+  },
 });
 
+
 const Phrase = sequelize.define('phrase', {
-  content: Sequelize.TEXT,
+  content: DataTypes.TEXT,
   score: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     defaultValue: 0,
+  },
+  voted: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
 });
 
@@ -52,5 +72,6 @@ sequelize.sync();
 export {
   User,
   Game,
-  Phrase
+  Phrase,
+  CONSTANTS,
 };
