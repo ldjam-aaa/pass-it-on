@@ -2,6 +2,7 @@ import path from 'path';
 import express from 'express';
 
 import api from './api/index';
+import { } from './db';
 
 const appRoot = path.dirname(require.main.filename);
 const appName = require('../package.json').name;
