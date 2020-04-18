@@ -3,8 +3,8 @@
         <div id="nav-bar">
             <router-link to="/"><img id="logo" :src="logo" /></router-link>
             <div class="right-align">
-                <router-link v-if="!userCreated" to="/signup"><h2>Sign Up</h2></router-link>
                 <h4>Hi {{ username }}!</h4>
+                <router-link v-if="!userCreated" to="/signup"><h2>Sign Up</h2></router-link>
                 <a v-if="userCreated" href="#" @click="signout"><h2>Sign Out</h2></a>
             </div>
         </div>
