@@ -7,6 +7,7 @@ store.dispatch('getUser');
 
 // NES..css styling
 import 'nes.css/css/nes.min.css';
+import 'typeface-press-start-2p';
 
 // Components
 import App from './view/App';

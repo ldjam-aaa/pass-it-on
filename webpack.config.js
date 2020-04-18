@@ -5,6 +5,11 @@ const CopyPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// Specifically to import globals for Less
+const fs = require('fs');
+const less_prepend = fs.readFileSync(path.join(__dirname, 'frontend-src', 'globals.less'));
+
+
 module.exports = {
     entry: {
         'index': path.join(__dirname, 'frontend-src', 'index.js')
@@ -18,7 +23,15 @@ module.exports = {
         rules: [
             {
                 test: /\.less$/,
-                use: ['vue-style-loader', 'css-loader', 'less-loader']
+                use: ['vue-style-loader',
+                    'css-loader',
+                    'less-loader',
+                    {
+                        loader: 'text-transform-loader',
+                        options: {
+                            prependText: less_prepend,
+                        },
+                    }],
             },
             {
                 test: /\.css$/,
@@ -34,7 +47,7 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|jpe?g|gif)$/i,
+                test: /\.(png|jpe?g|gif|png|woff|woff2|eot|ttf|svg)$/i,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name].[ext]?[hash]',

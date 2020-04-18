@@ -44,9 +44,10 @@ export default {
 #app {
     width: 100vh;
     height: 100vw;
-    margin: 0 3em;
-    margin-top: 85px;
+    margin: 0 auto;
+    margin-top: 100px;
     padding: 0 2em;
+    max-width: 1000px;
 }
 #nav-bar {
     display: flex;
@@ -57,7 +58,9 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    padding: 0 5em;
+    @media @desktop {
+        padding: 0 5em;
+    }
 
     .right-align {
         display: flex;

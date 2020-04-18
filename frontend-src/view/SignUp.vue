@@ -4,8 +4,11 @@
             Hello {{ createdUsername }}
         </div>
         <form v-else @submit.prevent="submit">
-            <label>Username: <input type="text" v-model="username" /></label>
-            <input type="submit" value="Sign Up">
+            <div class="nes-field">
+                <label for="username">Username: </label>
+                <input v-model="username" type="text" id="username" class="nes-input" />
+            </div>
+            <input type="submit" class="nes-btn is-primary" value="Sign Up">
         </form>
     </div>
 </template>
@@ -50,6 +53,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+input[type=submit] {
+    margin-top: 1em;
+}
 </style>
