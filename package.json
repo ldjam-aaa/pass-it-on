@@ -1,0 +1,45 @@
+{
+  "name": "pass-it-on",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -r dist static || true",
+    "backend:build": "npx babel backend-src -d dist",
+    "frontend:build": "npx webpack --progress --config webpack.config.js",
+    "build": "npm run clean && npm run backend:build && npm run frontend:build",
+    "build:prod": "npm run clean && NODE_ENV=production npm run backend:build && NODE_ENV=production npm run frontend:build",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ldjam-aaa/pass-it-on.git"
+  },
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/ldjam-aaa/pass-it-on/issues"
+  },
+  "homepage": "https://github.com/ldjam-aaa/pass-it-on#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "html-webpack-plugin": "^4.2.0",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.1",
+    "vue-router": "^3.1.6",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "express": "^4.17.1"
+  }
+}

@@ -1,0 +1,67 @@
+kind: pipeline
+type: docker
+name: test
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: node-modules
+    image: node:13
+    commands:
+      - npm ci
+  - name: build
+    image: node:13
+    commands:
+      - npm run build:prod
+  - name: test-deploy
+    image: plugins/docker
+    settings:
+      context: .
+      repo: garykim/pass-it-on
+      dry_run: true
+
+trigger:
+  branch:
+    - master
+  event:
+    - pull_request
+
+---
+
+kind: pipeline
+type: docker
+name: deploy
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: tags
+    image: alpine:3.11
+    commands:
+      - echo latest > .tags
+  - name: deploy
+    image: plugins/docker
+    settings:
+      context: .
+      password:
+        from_secret: docker_password
+      repo: garykim/pass-it-on
+      username: garykim
+  - name: update-prod
+    image: alpine:3.11
+    environment:
+      TOKEN:
+        from_secret: deploy_token
+    commands:
+      - echo webhook to https://webhook-gamma.garykim.dev/hooks/pass-it-on-deploy?token=$TOKEN
+      - wget -O - -q https://webhook-gamma.garykim.dev/hooks/pass-it-on-deploy?token=$TOKEN
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
