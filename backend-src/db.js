@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize'
 
+import { v4 as uuid } from 'uuid';
+
 // init sqlite database
 const sequelize = new Sequelize({
   dialect: 'sqlite',
@@ -8,12 +10,18 @@ const sequelize = new Sequelize({
 
 // define all the model schema
 const User = sequelize.define('user', {
-  name: Sequelize.STRING,
+  username: Sequelize.STRING,
   score: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   },
+  uuid: {
+    primaryKey: true,
+    type: Sequelize.UUID,
+  }
 });
+
+User.beforeCreate(user => user.uuid = uuid());
 
 const Game = sequelize.define('game', {
 
@@ -41,4 +49,8 @@ Phrase.belongsTo(User);
 sequelize.sync();
 
 // exports
-export default { };
+export {
+  User,
+  Game,
+  Phrase
+};

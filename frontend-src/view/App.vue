@@ -1,7 +1,12 @@
 <template>
     <div id="app">
         <div id="nav-bar">
-            <img id="logo" :src="logo" />
+            <router-link to="/"><img id="logo" :src="logo" /></router-link>
+            <div class="right-align">
+                <router-link v-if="!userCreated" to="/signup"><h2>Sign Up</h2></router-link>
+                <h4>Hi {{ username }}!</h4>
+                <a v-if="userCreated" href="#" @click="signout"><h2>Sign Out</h2></a>
+            </div>
         </div>
         <router-view />
     </div>
@@ -15,8 +20,23 @@ export default {
     computed: {
         logo() {
             return logo;
+        },
+        userCreated() {
+            return this.$store.getters.userCreated;
+        },
+        username() {
+            if (this.userCreated) {
+                return this.$store.state.user.username;
+            }
+            return "Anonymous";
         }
     },
+    methods: {
+        signout() {
+            this.$store.dispatch('signout');
+            document.location = "/";
+        }
+    }
 }
 </script>
 
@@ -29,12 +49,26 @@ export default {
     padding: 0 2em;
 }
 #nav-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     border-bottom: 4px solid #D3D3D3;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     padding: 0 5em;
+
+    .right-align {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: auto;
+
+        * {
+            margin-left: 10px;
+        }
+    }
 }
 #logo {
     height: 80px;
