@@ -6,8 +6,8 @@ export default async (req, res) => {
         res.status(401).send();
         return;
     }
-    const game = await Game.create({}).catch(e => {
-        res.status(500).send(e);
+    const game = await Game.create({}).catch(() => {
+        res.status(500).send();
     });
     if (game) {
         user.addGame(game);
