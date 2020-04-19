@@ -48,7 +48,7 @@ export default {
   methods: {
     endTimer() {
       console.log("end timer")
-      this.$router.push({ name: 'failure', params: { game_id: this.$route.params.game_id } })
+      this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
     }
   },
   data() { 
