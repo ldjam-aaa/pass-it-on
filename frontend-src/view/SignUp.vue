@@ -111,7 +111,6 @@ export default {
 }
 
 .submit {
-    width: 82px;
     align-self: center;
     background: transparent;
     border: none;
