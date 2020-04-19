@@ -34,8 +34,20 @@ export default async (req, res) => {
       attributes: [[sequelize.fn("COUNT", sequelize.col("*")), "count"]]
     })
     .catch(() => undefined);
+  const numberOfActiveGames = await user.getGames(
+    {
+      attributes: [[sequelize.fn("COUNT", sequelize.col("*")), "count"]]
+    },
+    {
+      where: {
+        state: {
+          defaultValue: 2
+        }
+      }
+    })
+    .catch(() => undefined);
 
-  if (!phrases || !numberOfPhrases || !numberOfGames) {
+  if (!phrases || !numberOfPhrases || !numberOfGames || !numberOfActiveGames) {
     res.status(500).send();
     return;
   }
@@ -46,7 +58,8 @@ export default async (req, res) => {
     uuid: user.uuid,
     phrases: phrases,
     numberOfPhrases: numberOfPhrases[0].dataValues.count,
-    numberOfGames: numberOfGames[0].dataValues.count
+    numberOfGames: numberOfGames[0].dataValues.count,
+    numberOfActiveGames: numberOfActiveGames[0].dataValues.count
   };
 
   res.json(tr);

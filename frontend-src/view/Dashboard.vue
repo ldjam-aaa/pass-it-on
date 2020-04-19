@@ -4,28 +4,28 @@
       <p>{{ userStats ? userStats.username : "LOOKS LIKE YOU AREN'T SIGNED IN" }}</p>
     </div>
     <div class="stats">
-      <div class="global_stats">
-        <div class="stat_box">
+      <div class="global-stats">
+        <div class="stat-box">
           <p>GLOBAL OBFUSCATIONS</p>
-          <p> {{ globalStats ? globalStats.numberOfPhrases : 0 }}</p>
+          <p> {{ globalStats ? globalStats.numberOfGames : 0 }}</p>
         </div>
-        <div class="stat_box">
+        <div class="stat-box">
           <p>GLOBAL ACTIVE CHANNELS</p>
-          <p>TODO: Display active games</p>
+          <p> {{ globalStats ? globalStats.numberOfActiveGames : 0 }}</p>
         </div>
       </div>
-      <div class="user_stats">
-        <div class="stat_box">
+      <div class="user-stats">
+        <div class="stat-box">
           <p>YOUR OBFUSCATIONS</p>
           <p>{{ userStats ? userStats.numberOfPhrases : 0 }}</p>
         </div>
-        <div class="stat_box">
+        <div class="stat-box">
           <p>YOUR ACTIVE CHANNELS</p>
-          <p>TODO: Display active games</p>
+          <p> {{ userStats ? userStats.numberOfActiveGames : 0 }}</p>
         </div>
-        <div class="stat_box">
+        <div class="stat-box">
           <p>ESPIONAGE CREDIT</p>
-          <p>{{ userStats ? userStats.Score : 0 }}</p>
+          <p>{{ userStats ? userStats.score : 0 }}</p>
         </div>
       </div>
     </div>
@@ -56,7 +56,6 @@ export default {
     );
     if (userRes.status === 200) {
       this.userStats = userRes.data;
-      console.log(userRes.data)
     } else {
       this.error = "No user stats found";
     }
@@ -87,17 +86,17 @@ export default {
     font-size: 24px;
   }
 }
-.global_stats {
+.global-stats {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-.user_stats {
+.user-stats {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-.stat_box {
+.stat-box {
   margin: 12px;
 }
 p {

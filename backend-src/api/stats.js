@@ -7,6 +7,21 @@ export default async (req, res) => {
     if (isNaN(numberOfGames)) {
         return;
     }
+
+    const numberOfActiveGames = await Game.count({
+      where: {
+        state: {
+          defaultValue: 2
+        }
+      }
+    }).catch(() => {
+        res.status(500).send();
+    });
+
+    if (isNaN(numberOfActiveGames)) {
+        return;
+    }
+
     const numberOfPhrases = await Phrase.count().catch(() => {
         res.status(500).send();
     });
@@ -16,5 +31,6 @@ export default async (req, res) => {
     res.json({
         numberOfGames,
         numberOfPhrases,
+        numberOfActiveGames
     });
 };
