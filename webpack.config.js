@@ -19,6 +19,7 @@ module.exports = {
         path: path.resolve(__dirname, 'static'),
         publicPath: '/'
     },
+    devtool: 'source-map',
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     module: {
         rules: [
