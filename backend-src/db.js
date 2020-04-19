@@ -2,14 +2,13 @@ import { Sequelize, DataTypes } from 'sequelize'
 
 import { v4 as uuid } from 'uuid';
 
+import config from "./config";
+
 // Constants object to be exported
 const CONSTANTS = {};
 
 // init sqlite database
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: process.env.DB_CONN_INFO || './database.db'
-});
+const sequelize = new Sequelize(config.database.connection);
 
 // define all the model schema
 const User = sequelize.define('user', {
