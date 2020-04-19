@@ -5,7 +5,7 @@
             <label for="username" class="title">ENTER YOUR CODENAME</label>
             <input v-model="username" type="text" id="username" class="input" placeholder="randomPlayer42"/>
             <p class="note">Note that your your codename will be viewed by other spies, do <i>not</i> reveal any personal information.</p>
-            <input type="submit" class="submit" value="Submit">
+            <input type="submit" class="submit" value="Submit" :disabled="loading">
         </form>
     </div>
 </template>
@@ -44,7 +44,7 @@ export default {
                 uuid: res.data.uuid
             };
             this.$store.commit('user', user);
-            this.loading = false;
+            this.$router.push('/dashboard')
         }
     }
 }
@@ -74,7 +74,7 @@ export default {
     line-height: 38px;
     color: #FEB32B;
     width: 100%;
-    
+
 }
 
 .input {
@@ -84,7 +84,7 @@ export default {
     border-radius: 5px;
     height: 60px;
     width: 100%;
-    
+
     text-align: center;
     font-family: 'Noto Serif JP', serif;
     font-style: normal;
