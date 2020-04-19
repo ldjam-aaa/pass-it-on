@@ -1,5 +1,35 @@
 <template>
-  <div>TODO: Implement Dashboard</div>
+  <div>
+    <div class="header">
+      <p>{{ userStats ? userStats.username : "LOOKS LIKE YOU AREN'T SIGNED IN" }}</p>
+    </div>
+    <div class="stats">
+      <div class="global_stats">
+        <div class="stat_box">
+          <p>GLOBAL OBFUSCATIONS</p>
+          <p> {{ globalStats ? globalStats.numberOfPhrases : 0 }}</p>
+        </div>
+        <div class="stat_box">
+          <p>GLOBAL ACTIVE CHANNELS</p>
+          <p>TODO: Display active games</p>
+        </div>
+      </div>
+      <div class="user_stats">
+        <div class="stat_box">
+          <p>YOUR OBFUSCATIONS</p>
+          <p>{{ userStats ? userStats.numberOfPhrases : 0 }}</p>
+        </div>
+        <div class="stat_box">
+          <p>YOUR ACTIVE CHANNELS</p>
+          <p>TODO: Display active games</p>
+        </div>
+        <div class="stat_box">
+          <p>ESPIONAGE CREDIT</p>
+          <p>{{ userStats ? userStats.Score : 0 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -26,11 +56,52 @@ export default {
     );
     if (userRes.status === 200) {
       this.userStats = userRes.data;
+      console.log(userRes.data)
     } else {
       this.error = "No user stats found";
     }
   }
 };
 </script>
+<style lang="less" scoped>
+.header{
+  color: white;
+  font-family: Open Sans Condensed;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin: 24px 0 24px 0;
+}
+.stats {
+  font-family: Open Sans Condensed;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  text-align: center;
 
-<style lang="less" scoped></style>
+  color: #FEB32B;
+  margin: 0%;
+
+  @media (max-width: 1200px){
+    font-size: 24px;
+  }
+}
+.global_stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.user_stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.stat_box {
+  margin: 12px;
+}
+p {
+  margin: 0;
+  padding: 0;
+}
+</style>

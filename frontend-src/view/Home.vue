@@ -29,8 +29,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
-
 .root {
     display: flex;
     justify-content: center;
@@ -96,6 +94,5 @@ button {
     text-decoration-line: underline;
 
     color: #F9EAE1;
-
 }
 </style>
