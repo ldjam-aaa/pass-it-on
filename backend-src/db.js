@@ -37,8 +37,9 @@ const Game = sequelize.define('game', {
   state: {
     type: DataTypes.INTEGER,
     validate: {
-      is: Object.values(CONSTANTS.GAME.STATE)
-    }
+      isIn: [Object.values(CONSTANTS.GAME.STATE)]
+    },
+    defaultValue: CONSTANTS.GAME.STATE.STARTED,
   },
 });
 

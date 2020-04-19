@@ -1,4 +1,7 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
+
+import { authMiddlware } from "../auth";
 
 import userAPI from './user/index';
 import gameAPI from './game/index';
@@ -6,8 +9,11 @@ import gameAPI from './game/index';
 // Accessible from /api
 const router = express.Router();
 
-// Use body parser
+// Middlewares
 router.use(express.json());
+router.use(cookieParser());
+router.use(authMiddlware);
+
 
 // Health check
 router.get('/healthcheck', (req, res) => {
