@@ -7,14 +7,6 @@ platform:
   arch: amd64
 
 steps:
-  - name: node-modules
-    image: node:13
-    commands:
-      - npm ci
-  - name: build
-    image: node:13
-    commands:
-      - npm run build:prod
   - name: test-deploy
     image: plugins/docker
     settings:
@@ -57,7 +49,6 @@ steps:
       TOKEN:
         from_secret: deploy_token
     commands:
-      - echo webhook to https://webhook-gamma.garykim.dev/hooks/pass-it-on-deploy?token=$TOKEN
       - wget -O - -q https://webhook-gamma.garykim.dev/hooks/pass-it-on-deploy?token=$TOKEN
 
 trigger:
