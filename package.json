@@ -1,5 +1,7 @@
 {
   "name": "pass-it-on",
+  "full_name": "Pass It On",
+  "private": true,
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",

@@ -4,6 +4,7 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 // Specifically to import globals for Less
 const fs = require('fs');
@@ -72,6 +73,9 @@ module.exports = {
             meta: {
                 viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
             },
+        }),
+        new webpack.DefinePlugin({
+            "APPLICATION_NAME": JSON.stringify(packagejson.full_name),
         }),
     ],
     resolve: {

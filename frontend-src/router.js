@@ -15,16 +15,16 @@ import Leaderboard from "./view/Leaderboard"
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/', component: Home },
-    { path: '/signup', component: SignUp },
-    { path: '/dashboard', component: Dashboard},
-    { path: '/start', component: Start},
-    { path: '/results', component: Results},
-    { path: '/failure', component: Failure},
-    { path: '/success', component: Success},
-    { path: '/decode', component: Decode},
-    { path: '/continue', component: Continue},
-    { path: '/leaderboard', component: Leaderboard}
+    { path: '/', component: Home, name: "Home" },
+    { path: '/signup', component: SignUp, name: "Sign Up" },
+    { path: '/dashboard', component: Dashboard, name: "Dashboard" },
+    { path: '/start', component: Start, name: "Start" },
+    { path: '/results', component: Results, name: "Results" },
+    { path: '/failure', component: Failure, name: "Failure" },
+    { path: '/success', component: Success, name: "Success" },
+    { path: '/decode', component: Decode, name: "Decode" },
+    { path: '/continue', component: Continue, name: "Continue" },
+    { path: '/leaderboard', component: Leaderboard, name: "Leaderboard" }
 ];
 
 const router = new VueRouter({
