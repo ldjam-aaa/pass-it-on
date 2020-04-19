@@ -1,6 +1,6 @@
 import { Game } from '../../../db';
 import { checkParams } from "../../../helpers";
-import { randomOrderPhrases } from "../../../phrases";
+import { phrases } from "../../../phrases";
 
 export default async (req, res) => {
     // Validate request
@@ -13,8 +13,10 @@ export default async (req, res) => {
         res.status(400).send();
         return;
     }
+    const submitted_phrase = req.body.phrase;
     const game_id = req.params.game_id;
-    if (!checkParams(res, 400, game_id)) {
+    const phrase_id = req.params.phrase_id;
+    if (!checkParams(res, 400, game_id, phrase_id, submitted_phrase)) {
         return;
     }
 
@@ -43,25 +45,32 @@ export default async (req, res) => {
         return;
     }
 
-    // Create response
-    const phrasesInGame = await game.getPhrases({
-        order: [
-            ['id', 'DESC'],
-        ],
-        limit: 1,
-    }).catch(() => undefined);
-    if (!phrasesInGame) {
-        res.status(500).send();
-    }
-    const phraseToSolve = phrasesInGame[0];
-
-    const phrases = randomOrderPhrases(game.firstPhraseId);
-    const tr = {
-        possible: phrases,
-        phrase: {
-            id: phraseToSolve.id,
-            content: phraseToSolve.content,
+    // Get associated phrase
+    const phraseList = await game.getPhrases({
+        where: {
+            id: phrase_id,
         },
-    };
-    res.json(tr);
+    }).catch(() => undefined);
+    if (!phraseList) {
+        res.status(404).send();
+    }
+    const phrase = phraseList[0];
+
+    // Put user in game
+    await user.addGame(game).catch(() => {
+        res.status(500).send();
+    });
+
+    // Check that the user was correct
+    const user_correct = phrases[game.firstPhraseId][0] === submitted_phrase;
+    if (!user_correct) {
+        res.json({
+            correct: false,
+        })
+        return;
+    }
+    phrase.increment('score');
+    res.json({
+        correct: true,
+    });
 };
