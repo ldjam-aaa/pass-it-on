@@ -42,7 +42,11 @@ const Game = sequelize.define('game', {
   phraseCount: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
-  }
+  },
+  firstPhraseId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
 
 const Phrase = sequelize.define('phrase', {

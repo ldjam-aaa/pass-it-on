@@ -7,17 +7,20 @@ export default async (req, res) => {
         res.status(401).send();
         return;
     }
-    const game = await Game.create({}).catch(() => {
-        res.status(500).send();
+    const newPhrase = randomPhrase();
+    const game = await Game.create({
+        firstPhraseId: newPhrase.id,
+    }).catch(() => {
+        res.status(500).send('error here');
     });
     if (!game) {
         return;
     }
     user.addGame(game);
     const phrase = await game.createPhrase({
-        content: randomPhrase(),
-    }).catch(() => {
-        res.status(500).send();
+        content: newPhrase.phrase,
+    }).catch(e => {
+        res.status(500).send(e);
     });
     if (!phrase) {
         return;
