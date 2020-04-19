@@ -5,8 +5,7 @@ import store from './store/store';
 store.dispatch('getUser');
 
 
-// NES..css styling
-import 'nes.css/css/nes.min.css';
+// Styling + Fonts
 import '@openfonts/open-sans-condensed_all';
 
 // Components
