@@ -3,11 +3,12 @@ import express from 'express';
 
 import api from './api/index';
 import { } from './db';
+import config from "./config";
 
 const appRoot = path.dirname(require.main.filename);
 const appName = require('../package.json').name;
 const app = express();
-const port = process.env.PORT || 3000;
+const port = config.server.port;
 
 // Use API router for all requests under /api
 app.use('/api', api);

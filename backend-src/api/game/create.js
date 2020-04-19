@@ -1,4 +1,5 @@
 import { Game } from '../../db';
+import randomPhrase from "../../phrases";
 
 export default async (req, res) => {
     const user = req.user;
@@ -9,8 +10,18 @@ export default async (req, res) => {
     const game = await Game.create({}).catch(() => {
         res.status(500).send();
     });
-    if (game) {
-        user.addGame(game);
-        res.send(game);
+    if (!game) {
+        return;
     }
+    user.addGame(game);
+    const phrase = await game.createPhrase({
+        content: randomPhrase(),
+    }).catch(() => {
+        res.status(500).send();
+    });
+    if (!phrase) {
+        return;
+    }
+    game.increment('phraseCount');
+    res.send(game);
 };
