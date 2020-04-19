@@ -1,4 +1,12 @@
+# Built files
 /dist
 /static
+
+# Node
 /node_modules
+
+# Database
 *.db
+
+# Miscellaneous
+.DS_Store
