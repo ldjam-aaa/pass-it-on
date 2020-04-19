@@ -7,6 +7,7 @@ store.dispatch('getUser');
 // Styling + Fonts
 import '@openfonts/open-sans-condensed_all';
 import 'typeface-noto-serif-jp';
+import 'typeface-nova-mono';
 
 // Services
 import windowTitle from "./services/windowTitle";
