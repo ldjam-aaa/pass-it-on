@@ -4,7 +4,7 @@
             <p class="title">PASS IT ON</p>
             <p class="subtitle">a game of <s>telephone</s></p>
             <p class="subtitle">international espionage</p>
-            <router-link to="/signup"><button class="start">start</button></router-link>
+            <router-link :to="startRoute"><button class="start">start</button></router-link>
         </div>
         <div class="links">
             <router-link to="/leaderboard"><button class="link">leaderboard</button></router-link>
@@ -16,7 +16,15 @@
 
 <script>
 export default {
-    name: "Home"
+    name: "Home",
+    computed: {
+        startRoute() {
+            if (this.$store.getters.userCreated) {
+                return "/dashboard"
+            }
+            return "/signup"
+        }
+    }
 }
 </script>
 
