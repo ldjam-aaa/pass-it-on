@@ -122,7 +122,7 @@ export default {
     font-size: 24px;
     line-height: 33px;
     color: #F9EAE1;
-    
+
     margin: 0;
     margin-top: 50px;
 

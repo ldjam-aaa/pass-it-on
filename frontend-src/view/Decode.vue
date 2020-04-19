@@ -3,10 +3,10 @@
        <div class="content">
             <p class="title">DECODE</p>
             <p class="subtitle">CHOOSE THE TRUE ORIGINAL MESSAGE</p>
-            
+
             <p class="subsubtitle">INK WILL AUTO-VAPORIZE IN:</p>
             <p class="timer">00:20</p>
-           
+
             <p class="subtitle">“An extremely fast furry predator leaped across a slothful wolf”</p>
             <div class="options">
                 <div class="option">
@@ -59,7 +59,7 @@ export default {
     margin: 0%;
 
 
-    
+
 }
 
 .subtitle {
