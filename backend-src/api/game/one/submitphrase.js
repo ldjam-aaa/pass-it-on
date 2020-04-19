@@ -1,6 +1,6 @@
-import {CONSTANTS, Game} from '../../db';
-import { checkParams } from "../../helpers";
-import config from "../../config";
+import {CONSTANTS, Game} from '../../../db';
+import { checkParams } from "../../../helpers";
+import config from "../../../config";
 
 export default async (req, res) => {
     // Validate request
@@ -52,5 +52,6 @@ export default async (req, res) => {
     }
     game.increment('phraseCount');
     phrase.setUser(user);
+    user.addGame(game);
     res.send(phrase);
 }
