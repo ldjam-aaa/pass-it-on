@@ -11,6 +11,7 @@ import Success from "./view/Success"
 import Decode from "./view/Decode"
 import Continue from "./view/Continue"
 import Leaderboard from "./view/Leaderboard"
+import About from "./view/About";
 
 Vue.use(VueRouter);
 
@@ -24,7 +25,8 @@ const routes = [
     { path: '/success/:phrase_id', component: Success, name: "Success" },
     { path: '/decode/:phrase_id', component: Decode, name: "Decode" },
     { path: '/continue/:phrase_id', component: Continue, name: "Continue" },
-    { path: '/leaderboard', component: Leaderboard, name: "Leaderboard" }
+    { path: '/leaderboard', component: Leaderboard, name: "Leaderboard" },
+    { path: '/about', component: About, name: "About" },
 ];
 
 const router = new VueRouter({

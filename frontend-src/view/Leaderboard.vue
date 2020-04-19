@@ -51,12 +51,18 @@ export default {
     justify-content: flex-start;
     min-height: 100vh;
     align-items: center;
+    padding-top: 80px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 h1 {
     color: #FEB32B;
     font-size: 100px;
     margin: 10px;
     padding: 0;
+    overflow: visible;
+    white-space: nowrap;
 }
 h3{
     color: #F9EAE1;
