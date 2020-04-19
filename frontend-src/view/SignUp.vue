@@ -86,7 +86,7 @@ export default {
     width: 100%;
     
     text-align: center;
-    font-family: Noto Serif;
+    font-family: 'Noto Serif JP', serif;
     font-style: normal;
     font-weight: normal;
     font-size: 24px;
@@ -99,7 +99,7 @@ export default {
 }
 
 .note {
-    font-family: Noto Serif;
+    font-family: 'Noto Serif JP', serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -114,7 +114,7 @@ export default {
     align-self: center;
     background: transparent;
     border: none;
-    font-family: Noto Serif;
+    font-family: 'Noto Serif JP', serif;
     font-style: normal;
     font-weight: normal;
     font-size: 24px;

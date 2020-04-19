@@ -56,6 +56,7 @@
     "nes.css": "^2.3.0",
     "sequelize": "^5.21.6",
     "sqlite3": "^4.1.1",
+    "typeface-noto-serif-jp": "0.0.75",
     "uuid": "^7.0.3",
     "vue-cookies": "^1.7.0",
     "vuex": "^3.1.3"
