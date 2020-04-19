@@ -38,7 +38,7 @@ export default {
     async mounted() {
         const res = await Axios.get('/api/user/leaderboard');
         if (res.status === 200) {
-            //this.players = res.data;
+            this.players = res.data;
         }
     },
 }

@@ -4,12 +4,12 @@
             <p class="title">PASS IT ON</p>
             <p class="subtitle">a game of <s>telephone</s></p>
             <p class="subtitle">international espionage</p>
-            <button class="start">start</button>
+            <router-link to="/signup"><button class="start">start</button></router-link>
         </div>
         <div class="links">
-            <button class="link">leaderboard</button>
-            <button class="link">about</button>
-            <button class="link">github</button>
+            <router-link to="/leaderboard"><button class="link">leaderboard</button></router-link>
+            <router-link to="/about"><button class="link">about</button></router-link>
+            <a href="https://github.com/ldjam-aaa/pass-it-on" target="_blank" rel="noopener"><button class="link">github</button></a>
         </div>
     </div>
 </template>
@@ -48,7 +48,7 @@ export default {
 
     color: #FEB32B;
     margin: 0%;
-    
+
 }
 
 .subtitle {
