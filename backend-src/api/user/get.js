@@ -1,3 +1,5 @@
+import sequelize from 'sequelize';
+
 import { User } from '../../db';
 
 import { checkParams } from "../../helpers";
@@ -13,8 +15,32 @@ export default async (req, res) => {
             uuid,
         },
     }).catch(() => {
-        res.status(500)
+        res.status(500).send();
     });
 
-    res.json(user);
+    if (!user) {
+        return;
+    }
+
+    const numberOfPhrases = await user.getPhrases({
+        attributes: [[sequelize.fn('COUNT', sequelize.col('*')), 'count']]
+    }).catch(() => undefined);
+    const numberOfGames = await user.getGames({
+        attributes: [[sequelize.fn('COUNT', sequelize.col('*')), 'count']]
+    }).catch(() => undefined);
+
+    if (!numberOfPhrases || !numberOfGames) {
+        res.status(500).send();
+        return;
+    }
+
+    const tr = {
+        username: user.username,
+        score: user.score,
+        uuid: user.uuid,
+        numberOfPhrases: numberOfPhrases[0].dataValues.count,
+        numberOfGames: numberOfGames[0].dataValues.count,
+    };
+
+    res.json(tr);
 };

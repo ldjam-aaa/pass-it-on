@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 
 import { authMiddlware } from "../auth";
 
+import statsAPI from './stats';
 import userAPI from './user/index';
 import gameAPI from './game/index';
 
@@ -19,6 +20,9 @@ router.use(authMiddlware);
 router.get('/healthcheck', (req, res) => {
     res.send(`Running okay!`);
 });
+
+// For /api/stats
+router.get('/stats', statsAPI);
 
 // For /api/user
 router.use('/user', userAPI);
