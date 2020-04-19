@@ -2,7 +2,16 @@
   <div>
     <div class="overlay">
       <p class="title">INK WILL AUTO-VAPORIZE IN:</p>
-      <div class="timer">01:00</div>
+      <div class="timer">
+        <countdown 
+          :end-time="new Date().getTime() + 3000"
+          v-on:finish="endTimer"
+        >
+          <template v-slot:process="time">
+            <span>{{ `${time.timeObj.m}:${time.timeObj.s}` }}</span>
+          </template>
+        </countdown>
+      </div>
     </div>
     <div class="root">
       <div class="content">
@@ -28,8 +37,43 @@
 </template>
 
 <script>
+import Axios from "axios";
+import countdown from 'vue-awesome-countdown/src/vue-awesome-countdown.vue'
+
 export default {
-  name: "Start"
+  name: "Start",
+  components: {
+    countdown
+  },
+  methods: {
+    endTimer() {
+      console.log("end timer")
+      this.$router.push({ name: 'failure', params: { game_id: this.$route.params.game_id } })
+    }
+  },
+  data() { 
+    return { 
+      phrase: "",
+    }; 
+  }, 
+  async mounted() { 
+    // we want to
+    // 1. join or create a game
+    console.log(this.$store.state.user.uuid);
+    // 2. submit our phrase to the game id if we do it in time
+
+    // 3. if we dont then failure
+
+    console.log(this.$route.params.game_id);
+
+    const res = await Axios.get("/api/user/leaderboard"); 
+
+    if (res.status === 200) { 
+      this.players = res.data; 
+    } 
+  }
+
+
 };
 </script>
 
