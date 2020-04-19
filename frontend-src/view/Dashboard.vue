@@ -70,7 +70,8 @@ export default {
   font-weight: bold;
   font-size: 24px;
   text-align: center;
-  margin: 24px 0 24px 0;
+  margin: 0 0 24px 0;
+  padding-top: 24px;
 }
 .stats {
   font-family: Open Sans Condensed;
