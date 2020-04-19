@@ -1,60 +1,91 @@
 <template>
-    <div>
-        <div v-if="userCreated">
-            Hello {{ createdUsername }}
-        </div>
-        <form v-else @submit.prevent="submit">
-            <div class="nes-field">
-                <label for="username">Username: </label>
-                <input v-model="username" type="text" id="username" class="nes-input" />
-            </div>
-            <input type="submit" class="nes-btn is-primary" value="Sign Up">
-        </form>
+    <div class="root">
+       <div class="content">
+           <p class="title">SUCCESS</p>
+           <p class="subtitle">SEMANTIC PRESERVATION CONFIRMED</p>
+           <p class="subtitle">TRANSMISSION WILL CONTINUE</p>
+           <p class="score">+100000 CREDITS</p>
+           <button class="view">view mission summary</button>
+       </div>
     </div>
 </template>
 
 <script>
-import Axios from 'axios';
-
-import { headers } from "../apiconfig";
-
 export default {
-    name: "SignUp",
-    data() {
-        return {
-            username: this.$store.state.user.name,
-            loading: false,
-        }
-    },
-    computed: {
-        userCreated() {
-            return this.$store.getters.userCreated;
-        },
-        createdUsername() {
-            return this.$store.state.user.username;
-        }
-    },
-    methods: {
-        async submit() {
-            this.loading = true;
-            const res = await Axios.post(`/api/user/create`, {
-                username: this.username
-            }, {
-                headers
-            });
-            const user = {
-                username: res.data.username,
-                uuid: res.data.uuid
-            };
-            this.$store.commit('user', user);
-            this.loading = false;
-        }
-    }
+    name: "Success"
 }
 </script>
 
 <style lang="less" scoped>
-input[type=submit] {
-    margin-top: 1em;
+.root {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+}
+.content {
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-family: Open Sans Condensed;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 100px;
+    line-height: 136px;
+    text-align: center;
+
+    color: #FEB32B;
+    margin: 0%;
+
+
+    
+}
+
+.subtitle {
+    font-family: 'Noto Serif JP', serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 49px;
+    text-align: center;
+
+    color: #F9EAE1;
+
+    margin: 0%;
+}
+
+.score {
+    font-family: Open Sans Condensed;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 68px;
+    text-align: center;
+
+    color: #FEB32B;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+button {
+    margin-top: 10px;
+
+    border: none;
+    background: transparent;
+    font-family: 'Noto Serif JP', serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 54px;
+    text-align: center;
+    text-decoration-line: underline;
+
+    color: #F9EAE1;
+
 }
 </style>
