@@ -50,7 +50,7 @@ export default async (req, res) => {
 
         // find a game that the user is not involved in
         for (let i = 0; i < randomActiveGames.length; i++) {
-            if (!(await randomActiveGames[i].hasUser(user))) {
+            if (!(await user.hasGame(randomActiveGames[i]))) {
                 res.json({
                     game_id: randomActiveGames[i].id,
                 });
