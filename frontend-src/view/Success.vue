@@ -52,9 +52,6 @@ export default {
 
     color: #FEB32B;
     margin: 0%;
-
-
-
 }
 
 .subtitle {

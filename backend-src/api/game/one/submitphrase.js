@@ -6,6 +6,8 @@ import levenshtein from 'fast-levenshtein';
 export default async (req, res) => {
     // Validate request
     const user = req.user;
+    console.log("USER IS:")
+    console.log(user)
     if (!user) {
         res.status(401).send();
         return;
