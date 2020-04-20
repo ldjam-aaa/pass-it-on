@@ -24,8 +24,14 @@ export default {
 
 <style lang="less" scoped>
 .root {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
     background-image: url('../img/failure.jpg');
     background-size: cover;
+    background-color: rgba(255,255,255,0.2)
 }
 .content {
     max-width: 800px;
@@ -33,6 +39,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgba(255,255,255,1)
 }
 
 .wrapper {
