@@ -225,6 +225,7 @@ button {
   // object-fit: cover;
   background-position: center;
   width: 100%;
+  user-select: none;
 }
 .games {
   display: flex;
