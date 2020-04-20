@@ -121,7 +121,7 @@ export const phrases = [
       "Only border collies are owned by jolly ranchers"
     ],
     [
-      "We despise illogical people and babies are illogical so we despise babies",
+      "We despise illogical people and babies are illogical ergo we despise babies",
       "We despise babies because they are dumb",
       "We love babies even though they are illogical",
       "We despise incoherent people and babies are incoherent so we despise babies",
@@ -156,6 +156,7 @@ export const phrases = [
       "I sprayed some herbicide on the weeds in my garden"
     ],
     [
+      "Do not go gentle into that good night",
       "Don't go softly into that good night",
       "Don't leave! It's dark outside!",
       "Don't go swiftly into that dangerous night",
