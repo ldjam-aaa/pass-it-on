@@ -2,6 +2,8 @@
 // or make a new game and return it if there are
 // not enough currently running games
 
+// Only returns games that the current user is not involved in
+
 import Sequelize from 'sequelize';
 
 import { CONSTANTS, Game } from '../../db';
@@ -32,7 +34,7 @@ export default async (req, res) => {
 
     if (numberOfActiveGames >= config.game.minGames) {
         // There's enough games already. Let's find a random game from this list.
-        const randomActiveGame = await Game.findOne({
+        const randomActiveGames = await Game.findAll({
             where: {
                 state: CONSTANTS.GAME.STATE.STARTED,
             },
@@ -41,14 +43,21 @@ export default async (req, res) => {
         }).catch(() => {
             res.status(500).send();
         });
-        if (!randomActiveGame) {
+        if (!randomActiveGames) {
             res.status(500).send();
             return;
         }
-        res.json({
-            game_id: randomActiveGame.id,
-        });
-        return;
+
+        // find a game that the user is not involved in
+        for (let i = 0; i < randomActiveGames.length; i++) {
+            if (!(await randomActiveGames[i].hasUser(user))) {
+                res.json({
+                    game_id: randomActiveGames[i].id,
+                });
+                return
+            }
+        }
+        // If there is no game that the user is not involved in, let's create a new game anyways
     }
 
     // A new game is required
@@ -60,7 +69,6 @@ export default async (req, res) => {
         res.status(500).send();
         return;
     }
-    user.addGame(game);
     const phrase = await game.createPhrase({
         content: newPhrase.phrase,
     }).catch(() => undefined);
