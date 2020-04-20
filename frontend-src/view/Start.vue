@@ -47,8 +47,25 @@ export default {
   },
   methods: {
     endTimer() {
-      console.log("end timer")
       this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
+    },
+    async submitPhrase() {
+      const reqBody = {
+        phrase: this.phrase
+      }
+
+      try {
+        const res = await Axios.post(`/api/game/one/${this.$route.params.game_id}/submitphrase`, reqBody);
+        this.$router.push({ name: 'Results', params: { game_id: this.$route.params.game_id,  } })
+      } catch (err) {
+        this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
+      }
+
+    }
+  },
+  computed: {
+    isValidPhrase: function () { 
+      return this.phrase.split(" ").length >= this.givenPhrase.content.split(" ").length;
     }
   },
   data() { 
@@ -57,26 +74,11 @@ export default {
     }; 
   }, 
   async mounted() { 
-    // we want to
-    // 1. join or create a game
-    console.log(this.$store.state.user.uuid);
-    // 2. submit our phrase to the game id if we do it in time
-
-    // 3. if we dont then failure
-
-    console.log(this.$route.params.game_id);
-    console.log('gonna axios')
-
+ 
     const res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/getphrase`); 
-    console.log('got past axios')
     if (res.status === 200) { 
-      console.log(res.data)
       this.givenPhrase = res.data.phrase;
-    } else {
-      console.err(res);
     }
-
-    console.log(this.givenPhrase)
   }
 
 
