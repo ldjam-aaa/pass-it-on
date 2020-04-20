@@ -5,16 +5,6 @@ import store from './store/store';
 store.dispatch('getUser');
 store.dispatch('getConfig');
 
-// Set up music
-import music from './audio/half-mystery.mp3';
-import { Howl } from 'howler';
-const musicHowl = new Howl({
-    src: [music],
-    loop: true,
-    autoplay: true,
-    volume: 0.025,
-});
-
 
 // Styling + Fonts
 import '@openfonts/open-sans-condensed_all';
