@@ -9,5 +9,6 @@ export default {
     },
     game: {
         maxPhrases: env.GAME_MAX_PHRASES || 10,
+        minGames: env.GAME_MIN_GAMES || 10,
     },
 };
