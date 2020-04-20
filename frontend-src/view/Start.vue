@@ -16,10 +16,10 @@
     <div class="root">
       <div class="content">
         <p class="title prompt">DECODED MESSAGE:</p>
-        <p class="title">“This is the phrase that you’re given”</p>
+        <p class="title">{{this.givenPhrase.content}}</p>
         <div class="subtitle">Rephrase this message in no less than 7 words</div>
-        <input type="text" class="phrase" placeholder="This is the phrase that you will be writing"/>
-        <button class="confirm">confirm message</button>
+        <input type="text" class="phrase" placeholder="This is the phrase that you will be writing" v-model="phrase"/>
+        <button class="confirm" v-on:click="submitPhrase" :disabled="!isValidPhrase">confirm message</button>
         <p class="subtitle info">
         <strong>additional espionage credit will be awarded to agents who</strong>
         <br>
@@ -65,12 +65,18 @@ export default {
     // 3. if we dont then failure
 
     console.log(this.$route.params.game_id);
+    console.log('gonna axios')
 
-    const res = await Axios.get("/api/user/leaderboard"); 
-
+    const res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/getphrase`); 
+    console.log('got past axios')
     if (res.status === 200) { 
-      this.players = res.data; 
-    } 
+      console.log(res.data)
+      this.givenPhrase = res.data.phrase;
+    } else {
+      console.err(res);
+    }
+
+    console.log(this.givenPhrase)
   }
 
 
