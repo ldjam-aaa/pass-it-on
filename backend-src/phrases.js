@@ -27,7 +27,7 @@ function randomPhrase() {
  */
 export function randomOrderPhrases(id) {
     const phrase = phrases[id];
-    return phrase.sort(() => Math.random() - 0.5);
+    return phrase.slice(0).sort(() => Math.random() - 0.5);
 }
 
 export default randomPhrase;
