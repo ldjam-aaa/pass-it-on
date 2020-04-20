@@ -76,7 +76,7 @@ export default async (req, res) => {
         return;
     }
 
-    this.user.increment('score', {
+    user.increment('score', {
         by: config.game.decodePoints,
     });
 
