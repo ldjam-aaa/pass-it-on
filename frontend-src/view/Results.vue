@@ -14,7 +14,7 @@
         </div>
         <p class="subsubtitle">
         headquarters rewards agents with the skill to decode obfuscation
-        derive the original message from 3 options for +1000 credits
+        derive the original message from 3 options for {{ pointsFromDecode }} credits
         </p>
         <p class="subsubtitle">
         <strong>
@@ -39,7 +39,10 @@ export default {
   computed: {
     points() {
       return this.$route.params.points;
-    }
+    },
+    pointsFromDecode() {
+      return this.$store.state.config.decodePoints;
+    },
   }
 };
 </script>

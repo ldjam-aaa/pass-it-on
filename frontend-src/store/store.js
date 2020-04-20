@@ -11,6 +11,9 @@ export default new Vuex.Store({
             username: "",
             uuid: Cookie.get("uuid") || "",
         },
+        config: {
+
+        },
     },
     getters: {
         userCreated(state) {
@@ -21,7 +24,10 @@ export default new Vuex.Store({
         user(state, val) {
             Cookie.set("uuid", val.uuid);
             state.user = val;
-        }
+        },
+        config(state, val) {
+            state.config = val;
+        },
     },
     actions: {
         /**
@@ -50,9 +56,15 @@ export default new Vuex.Store({
             const user = {
                 username: "",
                 uuid: "",
-            }
+            };
             ctx.commit('user', user);
-        }
+        },
+        async getConfig(ctx) {
+            const res = await Axios.get(`/api/config`);
+            if (res.status === 200) {
+                ctx.commit('config', res.data);
+            }
+        },
     }
 })
 

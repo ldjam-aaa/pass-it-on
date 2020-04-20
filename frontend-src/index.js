@@ -3,6 +3,7 @@ import Vue from 'vue';
 // Setup Vuex Store
 import store from './store/store';
 store.dispatch('getUser');
+store.dispatch('getConfig');
 
 // Styling + Fonts
 import '@openfonts/open-sans-condensed_all';

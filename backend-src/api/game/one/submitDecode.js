@@ -1,6 +1,7 @@
 import { Game } from '../../../db';
 import { checkParams } from "../../../helpers";
 import { phrases } from "../../../phrases";
+import config from "../../../config";
 
 export default async (req, res) => {
     // Validate request
@@ -44,23 +45,41 @@ export default async (req, res) => {
     }
     const phrase = phraseList[0];
 
-    // Put user in game
-    await user.addGame(game).catch(() => {
-        res.status(500).send();
-    });
-    console.log(submitted_phrase);
-    console.log(phrases[game.firstPhraseId][0]);
-    
-    
+    if (phrase.voted) {
+        res.status(401).json({
+            correct: false,
+            error: "This phrase has already been voted on",
+        });
+        return;
+    }
+
+    phrase.set('voted', true);
+    phrase.save();
+
     // Check that the user was correct
     const user_correct = phrases[game.firstPhraseId][0] === submitted_phrase;
     if (!user_correct) {
         res.json({
             correct: false,
-        })
+        });
+
+        // Remove points from player that gave the phrase for which the submitted phrase was incorrect
+        const phraseUser = await phrase.getUser().catch(() => undefined);
+        if (!phraseUser) {
+            res.status(500).send();
+            return;
+        }
+        phraseUser.decrement('score', {
+            by: phrase.score,
+        });
+
         return;
     }
-    phrase.increment('score');
+
+    this.user.increment('score', {
+        by: config.game.decodePoints,
+    });
+
     res.json({
         correct: true,
     });

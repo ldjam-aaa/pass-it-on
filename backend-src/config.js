@@ -14,5 +14,6 @@ export default {
         levenshteinPointsMultiplier: env.GAME_LEVENSHTEIN_POINTS_MULTIPLIER || 50,
         sameNumWordsPoints: env.GAME_SAME_NUM_WORDS_POINTS || 300,
         noIdenticalWordsPoints: env.GAME_NO_IDENTICAL_WORDS_POINTS || 300,
+        decodePoints: env.GAME_DECODE_POINTS || 500,
     },
 };
