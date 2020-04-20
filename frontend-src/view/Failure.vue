@@ -39,7 +39,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(255,255,255,1)
 }
 
 .wrapper {
