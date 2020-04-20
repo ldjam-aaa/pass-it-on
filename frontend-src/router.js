@@ -12,6 +12,7 @@ import Decode from "./view/Decode"
 import Continue from "./view/Continue"
 import Leaderboard from "./view/Leaderboard"
 import About from "./view/About";
+import Error from "./view/Error";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,7 @@ const routes = [
     { path: '/continue/:game_id', component: Continue, name: "Continue" },
     { path: '/leaderboard', component: Leaderboard, name: "Leaderboard" },
     { path: '/about', component: About, name: "About" },
+    { path: '/error', component: Error, name: "Error" },
 ];
 
 export const disableGradientList = [

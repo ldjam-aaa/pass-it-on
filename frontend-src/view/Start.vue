@@ -80,7 +80,7 @@ export default {
         this.$router.push({ name: 'Results', params: { game_id: this.$route.params.game_id, givenPhrase: this.givenPhrase, phrase: this.phrase, points: res.data.score } })
       } catch (err) {
         sound.stop()
-        this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
+        this.$router.push({ name: 'Error'})
       }
 
     }
