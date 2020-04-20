@@ -1,13 +1,14 @@
 <template>
   <div class="root">
     <form @submit.prevent="submit" class="form">
+      <div class="hand"/>
       <label for="username" class="title">ENTER YOUR CODENAME</label>
       <input
         v-model="username"
         type="text"
         id="username"
         class="input"
-        placeholder="randomPlayer42"
+        placeholder="type in your codename here"
       />
       <p class="note">
         Note that your your codename will be viewed by other spies, do
@@ -68,13 +69,21 @@ export default {
   justify-content: center;
   min-height: 100vh;
   align-items: center;
+
+
+
+
 }
 
 .form {
-  max-width: 700px;
+  max-width: 800px;
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding: 90px;
+  background: url('../img/notebook.png'); box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.25);
+  transform: rotate(0.68deg);
+
 }
 
 .title {
@@ -83,12 +92,27 @@ export default {
   font-weight: bold;
   font-size: 30px;
   line-height: 38px;
-  color: #feb32b;
+  color: #0C1221;
   width: 100%;
 }
 
+.hand {
+  position: absolute;
+  width: 300px;
+  height: 249px;
+
+  left: 700px;
+  top: -100px;
+
+  transform: rotate(-10deg);
+
+  background: url('../img/hand.png');
+
+}
+
 .input {
-  background: transparent;
+  background-color: #0C1221;
+  opacity: 70%;
   border: 1px solid #f9eae1;
   box-sizing: border-box;
   border-radius: 5px;
@@ -110,11 +134,12 @@ export default {
 .note {
   font-family: "Noto Serif JP", serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 600;
   font-size: 18px;
-  line-height: 25px;
+  line-height: 28px;
+  padding-top:11px;
 
-  color: #f9eae1;
+  color: #8C6E5C;
   overflow-wrap: break-word;
   margin: 0%;
 }
@@ -133,7 +158,7 @@ export default {
   text-align: center;
   text-decoration-line: underline;
 
-  color: #f9eae1;
+  color: #0C1221;
 
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin-top: 20px;
