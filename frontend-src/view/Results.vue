@@ -12,18 +12,21 @@
                 <p class="subtitle">+{{ points[key] }}</p>
             </div>
         </div>
-        <p class="subsubtitle info">
-        headquarters rewards agents with the skill to decode obfuscation
-        derive the original message from 3 options for {{ pointsFromDecode }} credits
-        </p>
-        <p class="subsubtitle info">
-        <strong>
-            failure to decode will result in immediate nullification of communication chain
-            <br/>no points will be gained
-        </strong>
-        </p>
 
         <button @click="decode">decode</button>
+
+        <div class="paper">
+          <p class="info">
+          headquarters rewards agents with the skill to decode obfuscation
+          derive the original message from 3 options for {{ pointsFromDecode }} credits
+          </p>
+          <p class="info">
+              failure to decode will result in immediate nullification of communication chain
+              <br/>no points will be gained
+          </p>
+
+        </div>
+
     </div>
   </div>
 </template>
@@ -142,14 +145,17 @@ button {
 
   font-style: normal;
   font-weight: 300;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 33px;
   text-align: center;
   text-decoration-line: underline;
 
   color: #f9eae1;
   margin-top: 30px;
+  margin-bottom: 40px;
   cursor: pointer;
+  text-shadow: 0px 8px 4px rgba(0, 0, 0, 0.25);
+
 }
 
 .rewardPrompt {
@@ -178,6 +184,25 @@ button {
 
 .info {
   font-size: 18px;
+  color: #0C1221;
+  text-align: center;
+  margin: 0;
+}
+
+.paper {
+    margin: 0;
+    text-align: left;
+    align-self: flex-start;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    line-height: 31px;
+    font-weight: 400;
+    background-image: url('../img/notebook.png');
+    padding-top: 29px;
+    padding-bottom: 5px;
+    color: #0C1221;
+
+    width: 100% ;
 }
 
 </style>
