@@ -140,6 +140,27 @@ export const phrases = [
       "The lion invited me to his party even though I don't live on the savannah",
       "My friend lion friend is a party animal who parties with all the animals on the savannah",
       "The lion is throwing a party and inviting all the animals but me"
+    ],
+    [
+      "The red fox trots quietly at midnight",
+      "The brown fox tiptoes in the streets at midnight",
+      "The red herring flies at midnight",
+      "The red fox goes hunting at dawn",
+      "The fox left silently at midnight"
+    ],
+    [
+      "My garden is full of weeds this year even though I sprayed some herbicide",
+      "My garden is riddled with weeds despite my efforts",
+      "My garden is full of weeds. Better call the gardener!",
+      "My garden is full of weeds so I have to pluck them out",
+      "I sprayed some herbicide on the weeds in my garden"
+    ],
+    [
+      "Don't go softly into that good night",
+      "Don't leave! It's dark outside!",
+      "Don't go swiftly into that dangerous night",
+      "The night is dark; please don't go",
+      "When you leave, go softly into that good night"
     ]
 ];
 
