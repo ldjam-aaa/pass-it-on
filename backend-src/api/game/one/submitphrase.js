@@ -122,7 +122,7 @@ function identicalWords(phrase, givenPhrase) {
  */
 function validPhrase(phrase, lastPhrase) {
     // Check not identical
-    if (phrase.trim() !== lastPhrase.trim()) {
+    if (phrase.trim() === lastPhrase.trim()) {
         return false;
     }
 

@@ -14,15 +14,17 @@
         Note that your your codename will be viewed by other spies, do
         <i>not</i> reveal any personal information.
       </p>
-      <input type="submit" class="submit" value="Submit" :disabled="loading" />
+      <input type="submit" class="submit" value="Submit" :disabled="loading || badUsername" />
     </form>
   </div>
 </template>
 
 <script>
 import Axios from "axios";
-
 import { headers } from "../apiconfig";
+const Filter = require('bad-words');
+const filter = new Filter();
+
 
 export default {
   name: "SignUp",
@@ -38,7 +40,11 @@ export default {
     },
     createdUsername() {
       return this.$store.state.user.username;
+    },
+    badUsername() {
+      return filter.isProfane(this.username)
     }
+
   },
   methods: {
     async submit() {
