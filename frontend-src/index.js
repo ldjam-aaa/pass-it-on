@@ -12,7 +12,7 @@ const musicHowl = new Howl({
     src: [music],
     loop: true,
     autoplay: true,
-    volume: 0.15,
+    volume: 0.025,
 });
 
 
