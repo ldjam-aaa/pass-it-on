@@ -30,7 +30,7 @@ export const phrases = [
       "The rivers in Spain meander through the plains"
     ],
     [
-      "Arnold Schwarzenegger has a miniature horse named Whiskey and a donkey named LuLu",
+      "Arnold Schwarzenegger has a miniature horse and a donkey",
       "Arnold Schwarzenegger has a miniature horse named Gin and a donkey named Bourbon",
       "Arnold Schwarzenegger has a two miniature horses",
       "Arnold Schwarzenegger has a miniature horse named Lulu and a donkey named Lily",
@@ -161,6 +161,20 @@ export const phrases = [
       "Don't go swiftly into that dangerous night",
       "The night is dark; please don't go",
       "When you leave, go softly into that good night"
+    ],
+    [
+      "Jimmy goes to the barber shop on Wednesdays",
+      "Jimmy gets his beard trimmed on Tuesdays",
+      "Jimmy gets lunch with the barber on Wednesdays because they're best friends",
+      "Jimmy got his hair dyed last Wednesdays",
+      "I saw Jimmy at the shop on Wednesday"
+    ],
+    [
+      "Salamanders like slimy rocks but newts only like shiny ones",
+      "Newts like slimy rocks but salamanders only like shiny ones",
+      "Lizards like shiny rocks, especially if they're slimy",
+      "Salamanders like slippery rocks but not slimy ones",
+      "Slimy rocks are liked by salamanders but not by newts"
     ]
 ];
 
