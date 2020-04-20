@@ -82,9 +82,10 @@ export default {
     height: 100%;
     min-height: 100vh;
     margin: 0;
+    background: radial-gradient(transparent, #4A2914);
 
     &.gradient {
-        background: radial-gradient(transparent, #4A2914);
+        background: initial;
     }
 }
 </style>
