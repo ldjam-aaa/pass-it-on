@@ -56,7 +56,7 @@ export default {
 
       try {
         const res = await Axios.post(`/api/game/one/${this.$route.params.game_id}/submitphrase`, reqBody);
-        this.$router.push({ name: 'Results', params: { game_id: this.$route.params.game_id,  } })
+        this.$router.push({ name: 'Results', params: { game_id: this.$route.params.game_id, givenPhrase: this.givenPhrase, phrase: this.phrase } })
       } catch (err) {
         this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
       }

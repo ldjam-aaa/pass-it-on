@@ -1,9 +1,9 @@
 <template>
   <div class="root">
     <div class="content">
-        <div class="prevPrompt subsubtitle">“This is the original prompt”</div>
+        <div class="prevPrompt subsubtitle">{{this.$route.params.givenPhrase.content}}</div>
         <div class="arrow">↓</div>
-        <div class="currPrompt subtitle">“This is the modified prompt”</div>
+        <div class="currPrompt subtitle">{{this.$route.params.phrase}}</div>
 
         <p class="subsubtitle rewardPrompt">extra credit awarded:</p>
         <div class="rewards">
@@ -11,10 +11,15 @@
                 <p class="subsubtitle">Levenshtein Distance</p>
                 <p class="subtitle">+300</p>
             </div>
-            <div class="reward">
-                <p class="subsubtitle">Levenshtein Distance</p>
+            <div class="reward" v-if="noIdenticalWords()">
+                <p class="subsubtitle">No identical words</p>
                 <p class="subtitle">+300</p>
             </div>
+            <div class="reward" v-if="sameNumWords()">
+                <p class="subsubtitle">No added words</p>
+                <p class="subtitle">+300</p>
+            </div>
+
         </div>
         <p class="subsubtitle">
         headquarters rewards agents with the skill to decode obfuscation
@@ -27,14 +32,37 @@
         </strong>
         </p>
 
-        <button>decode</button>
+        <button @click="decode">decode</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Results"
+  name: "Results",
+  methods: {
+    decode() {
+      this.$router.push({name:"Decode", params: this.$route.params})
+    },
+    sameNumWords() {
+      const givenPhraseArr = this.$route.params.givenPhrase.content.split(" ") 
+      const phraseArr = this.$route.params.phrase.split(" ")
+
+      return givenPhraseArr.length == phraseArr.length
+    },
+    noIdenticalWords() {
+      const givenPhraseArr = this.$route.params.givenPhrase.content.split(" ") 
+      const phraseArr = this.$route.params.phrase.split(" ")
+
+      for(let word of phraseArr) {
+        if(givenPhraseArr.includes(word)) {
+          return false
+        }
+      }
+
+      return true
+    }
+  }
 };
 </script>
 

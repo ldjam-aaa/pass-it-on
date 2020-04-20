@@ -5,7 +5,16 @@
             <p class="subtitle">CHOOSE THE TRUE ORIGINAL MESSAGE</p>
 
             <p class="subsubtitle">INK WILL AUTO-VAPORIZE IN:</p>
-            <p class="timer">00:20</p>
+            <p class="timer">
+                <countdown 
+                    :end-time="new Date().getTime() + 30000"
+                    v-on:finish="endTimer"
+                >
+                    <template v-slot:process="time">
+                        <span>{{ `${time.timeObj.m}:${time.timeObj.s}` }}</span>
+                    </template>
+                </countdown>
+            </p>
 
             <p class="subtitle">“An extremely fast furry predator leaped across a slothful wolf”</p>
             <div class="options">
@@ -27,8 +36,21 @@
 </template>
 
 <script>
+
+import countdown from 'vue-awesome-countdown/src/vue-awesome-countdown.vue'
+
+
 export default {
-    name: "Decode"
+    name: "Decode",
+    components: { 
+        countdown 
+    },
+    methods: {
+        endTimer() {
+            this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
+        },
+    }
+
 }
 </script>
 
