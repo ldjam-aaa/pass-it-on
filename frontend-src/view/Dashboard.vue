@@ -51,8 +51,14 @@ export default {
     async startGame() {
       this.loadingGame = true;
       try {
+        
         const res = await Axios.post("/api/game/create");
         this.loadingGame = false;
+
+
+
+        
+
 
         const game_id = res.data.id;
         this.$router.push({name: "Start", params: {game_id}})

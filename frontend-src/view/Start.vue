@@ -39,6 +39,14 @@
 <script>
 import Axios from "axios";
 import countdown from 'vue-awesome-countdown/src/vue-awesome-countdown.vue'
+import { Howl, Howler } from 'howler';
+import tick from '../audio/tick.mp3'
+
+const sound = new Howl({
+  src: [tick],
+  loop: true,
+  volume: 0.3
+});
 
 export default {
   name: "Start",
@@ -47,6 +55,7 @@ export default {
   },
   methods: {
     endTimer() {
+      sound.stop()
       this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
     },
     async submitPhrase() {
@@ -56,8 +65,10 @@ export default {
 
       try {
         const res = await Axios.post(`/api/game/one/${this.$route.params.game_id}/submitphrase`, reqBody);
+        sound.stop()
         this.$router.push({ name: 'Results', params: { game_id: this.$route.params.game_id, givenPhrase: this.givenPhrase, phrase: this.phrase } })
       } catch (err) {
+        sound.stop()
         this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
       }
 
@@ -75,11 +86,17 @@ export default {
     }; 
   }, 
   async mounted() { 
- 
+    sound.play()
+
     const res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/getphrase`); 
     if (res.status === 200) { 
       this.givenPhrase = res.data.phrase;
     }
+
+
+    
+
+
   }
 
 

@@ -49,7 +49,7 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|jpe?g|gif|png|woff|woff2|eot|ttf|svg)$/i,
+                test: /\.(png|jpe?g|gif|png|woff|woff2|eot|ttf|svg|mp3)$/i,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name].[ext]?[hash]',
