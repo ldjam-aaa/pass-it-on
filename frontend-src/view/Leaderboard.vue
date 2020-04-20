@@ -1,28 +1,33 @@
 <template>
-  <div class="root">
-    <div class="content">    
-        <h1>TOP RANKED AGENTS</h1>
-        <h3>OUR BEST AND BRIGHTEST SPIES</h3>
-        <table>
-        <tr>
-            <th>Rank</th>
-            <th>Player Name</th>
-            <th>Score</th>
-        </tr>
-        <template v-if="players.length === 0">
-            <tr>
-            <td colspan="3">No agents are currently in the database.</td>
-            </tr>
-            <tr>
-            <td colspan="3">Become the first and proudly serve our agency!</td>
-            </tr>
-        </template>
-        <tr v-for="(player, i) in players" :key="i">
-            <td>{{ i + 1 }}</td>
-            <td>{{ player.username }}</td>
-            <td>{{ player.score }}</td>
-        </tr>
-        </table>
+  <div>
+    <div class="navigation">
+      <button class="home" v-on:click="goHome">Go Home</button>
+    </div>
+    <div class="root">
+      <div class="content">
+          <h1>TOP RANKED AGENTS</h1>
+          <h3>OUR BEST AND BRIGHTEST SPIES</h3>
+          <table>
+          <tr>
+              <th>Rank</th>
+              <th>Player Name</th>
+              <th>Score</th>
+          </tr>
+          <template v-if="players.length === 0">
+              <tr>
+              <td colspan="3">No agents are currently in the database.</td>
+              </tr>
+              <tr>
+              <td colspan="3">Become the first and proudly serve our agency!</td>
+              </tr>
+          </template>
+          <tr v-for="(player, i) in players" :key="i">
+              <td>{{ i + 1 }}</td>
+              <td>{{ player.username }}</td>
+              <td>{{ player.score }}</td>
+          </tr>
+          </table>
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +42,11 @@ export default {
       players: []
     };
   },
+  methods: {
+    goHome() {
+        this.$router.push({ name: 'Home' });
+    }
+  },
   async mounted() {
     const res = await Axios.get("/api/user/leaderboard");
     if (res.status === 200) {
@@ -49,14 +59,13 @@ export default {
 <style lang="less" scoped>
 .root {
     display: flex;
+    justify-content: center;
     min-height: 100vh;
-    align-items: center;
-    flex-direction: column;
 }
 .content {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding-top: 80px;
   max-width: 800px;
@@ -88,5 +97,22 @@ table {
   th {
     padding: 0 60px 20px 0;
   }
+}
+button {
+    margin-top: 24px;
+
+    border: none;
+    margin-left: 12px;
+    background: transparent;
+    font-family: 'Noto Serif JP', serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    text-align: left;
+    text-decoration-line: underline;
+
+    color: #F9EAE1;
+    cursor: pointer;
+
 }
 </style>

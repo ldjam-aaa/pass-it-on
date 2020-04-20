@@ -1,61 +1,60 @@
 <template>
-  <div class="root">
-    <div class="content">
-      <div class="header">
-        <p>{{ userStats ? userStats.username : "LOOKS LIKE YOU AREN'T SIGNED IN" }}</p>
-      </div>
-      <div class="stats">
-        <div class="global-stats">
-          <div class="stat-box">
-            <p>GLOBAL OBFUSCATIONS</p>
-            <p>{{ globalStats ? globalStats.numberOfGames : 0 }}</p>
-          </div>
-          <div class="stat-box">
-            <p>GLOBAL ACTIVE CHANNELS</p>
-            <p>{{ globalStats ? globalStats.numberOfActiveGames : 0 }}</p>
-          </div>
-        </div>
-        <div class="user-stats">
-          <div class="stat-box">
-            <p>YOUR OBFUSCATIONS</p>
-            <p>{{ userStats ? userStats.numberOfPhrases : 0 }}</p>
-          </div>
-          <div class="stat-box">
-            <p>YOUR ACTIVE CHANNELS</p>
-            <p>{{ userStats ? userStats.numberOfActiveGames : 0 }}</p>
-          </div>
-          <div class="stat-box">
-            <p>ESPIONAGE CREDIT</p>
-            <p>{{ userStats ? userStats.score : 0 }}</p>
-          </div>
-        </div>
-      </div>
-
-      <button @click="startGame" :disabled="loadingGame">pass on a new message</button>
-      <hr>
+  <div>
+    <div class="navigation">
+      <button class="home" v-on:click="goHome">Go Home</button>
     </div>
-
-    <div class="games" v-if="userStats">
-      <div class="game" v-for="game in userStats.games.filter(e => e.id in gamePhrases)" :key="game.id">
-        <h1>"{{gamePhrases[game.id][gamePhraseIdx[game.id]].content}}"</h1>
-        <div class="timeline">
-          <!-- <div  class="timeline"> -->
-          <p v-on:click="setIndex(game.id,gamePhrases[game.id].map(e => e.id).indexOf(phrase.id))" v-for="phrase in gamePhrases[game.id]" :class="gamePhrases[game.id][gamePhraseIdx[game.id]].id === phrase.id ? 'icon' : 'icon disabled'" :key="phrase.id">⬤</p>
-          <!-- </div> -->
+    <div class="root">
+      <div class="content">
+        <div class="header">
+          <p>{{ userStats ? userStats.username : "LOOKS LIKE YOU AREN'T SIGNED IN" }}</p>
         </div>
-        <p class="info">
-          This phrase has been passed along by <strong>{{gamePhrases[game.id].length-1}}</strong> people!
-          <br><br>
-          The original phrase was:  <strong>“{{gamePhrases[game.id][0].content}}”</strong>
-          <br>
-          The latest phrase was: <strong>“{{gamePhrases[game.id][gamePhrases[game.id].length-1].content}}”</strong>
+        <div class="stats">
+          <div class="global-stats">
+            <div class="stat-box">
+              <p>GLOBAL OBFUSCATIONS</p>
+              <p>{{ globalStats ? globalStats.numberOfGames : 0 }}</p>
+            </div>
+            <div class="stat-box">
+              <p>GLOBAL ACTIVE CHANNELS</p>
+              <p>{{ globalStats ? globalStats.numberOfActiveGames : 0 }}</p>
+            </div>
+          </div>
+          <div class="user-stats">
+            <div class="stat-box">
+              <p>YOUR OBFUSCATIONS</p>
+              <p>{{ userStats ? userStats.numberOfPhrases : 0 }}</p>
+            </div>
+            <div class="stat-box">
+              <p>YOUR ACTIVE CHANNELS</p>
+              <p>{{ userStats ? userStats.numberOfActiveGames : 0 }}</p>
+            </div>
+            <div class="stat-box">
+              <p>ESPIONAGE CREDIT</p>
+              <p>{{ userStats ? userStats.score : 0 }}</p>
+            </div>
+          </div>
+        </div>
 
+        <button @click="startGame" :disabled="loadingGame">pass on a new message</button>
+        <hr>
+      </div>
 
-        </p>
-
-
-
-
+      <div class="games" v-if="userStats">
+        <div class="game" v-for="game in userStats.games.filter(e => e.id in gamePhrases)" :key="game.id">
+          <h1>"{{gamePhrases[game.id][gamePhraseIdx[game.id]].content}}"</h1>
+          <div class="timeline">
+            <!-- <div  class="timeline"> -->
+            <p v-on:click="setIndex(game.id,gamePhrases[game.id].map(e => e.id).indexOf(phrase.id))" v-for="phrase in gamePhrases[game.id]" :class="gamePhrases[game.id][gamePhraseIdx[game.id]].id === phrase.id ? 'icon' : 'icon disabled'" :key="phrase.id">⬤</p>
+            <!-- </div> -->
+          </div>
+          <p class="info">
+            This phrase has been passed along by <strong>{{gamePhrases[game.id].length-1}}</strong> people!
+            <br><br>
+            The original phrase was:  <strong>“{{gamePhrases[game.id][0].content}}”</strong>
+            <br>
+            The latest phrase was: <strong>“{{gamePhrases[game.id][gamePhrases[game.id].length-1].content}}”</strong>
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -89,6 +88,9 @@ export default {
         const game_id = res.data.game_id;
         this.$router.push({ name: "Start", params: { game_id } });
       } catch (err) {}
+    },
+    goHome() {
+        this.$router.push({ name: 'Home' });
     }
   },
   async mounted() {
@@ -274,6 +276,24 @@ hr {
   max-width: 95vw;
   overflow: hidden;
   align-self: center;
+
+}
+
+button {
+    margin-top: 24px;
+
+    border: none;
+    margin-left: 12px;
+    background: transparent;
+    font-family: 'Noto Serif JP', serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    text-align: left;
+    text-decoration-line: underline;
+
+    color: #F9EAE1;
+    cursor: pointer;
 
 }
 </style>

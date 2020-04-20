@@ -1,30 +1,39 @@
 <template>
-    <div class="root">
-        <div class="content">
-            <h1>ABOUT</h1>
-            <h3>LUDEM DARE 46: KEEP IT ALIVE</h3>
+  <div>
+    <div class="navigation">
+      <button class="home" v-on:click="goHome">Go Home</button>
+    </div>
+      <div class="root">
+          <div class="content">
+              <h1>ABOUT</h1>
+              <h3>LUDEM DARE 46: KEEP IT ALIVE</h3>
 
-            <div>
-                <div class="section">
-                    <p class="subtitle">THE GAME</p>
-                    <p>This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc.</p>
-                </div>
-                <div class="section" id="the-team">
-                    <p class="subtitle">THE TEAM</p>
-                    <h3 class="author-name">Name</h3> - <a href="https://pio.garykim.dev" rel="noopener">Website link</a>
-                    <p>Test test 123</p>
-                </div>
-            </div>
-            <p><a href="/3rdpartylibraries.txt">3rd Party Libraries</a></p>
-            <p>Music: "Half Mystery" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">http://creativecommons.org/licenses/by/4.0/</a></p>
-        </div>
-
+              <div>
+                  <div class="section">
+                      <p class="subtitle">THE GAME</p>
+                      <p>This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc.</p>
+                  </div>
+                  <div class="section" id="the-team">
+                      <p class="subtitle">THE TEAM</p>
+                      <h3 class="author-name">Name</h3> - <a href="https://pio.garykim.dev" rel="noopener">Website link</a>
+                      <p>Test test 123</p>
+                  </div>
+              </div>
+              <p><a href="/3rdpartylibraries.txt">3rd Party Libraries</a></p>
+              <p>Music: "Half Mystery" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">http://creativecommons.org/licenses/by/4.0/</a></p>
+          </div>
+      </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "About"
+    name: "About",
+    methods: {
+      goHome() {
+          this.$router.push({ name: 'Home' });
+      }
+    },
 }
 </script>
 
@@ -82,5 +91,22 @@ a {
     a {
         margin-left: 5px;
     }
+}
+button {
+    margin-top: 24px;
+
+    border: none;
+    margin-left: 12px;
+    background: transparent;
+    font-family: 'Noto Serif JP', serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    text-align: left;
+    text-decoration-line: underline;
+
+    color: #F9EAE1;
+    cursor: pointer;
+
 }
 </style>
