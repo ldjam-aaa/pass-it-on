@@ -1,12 +1,14 @@
 <template>
     <div class="root">
-       <div class="content">
-           <p class="title">SUCCESS</p>
-           <p class="subtitle">SEMANTIC PRESERVATION CONFIRMED</p>
-           <p class="subtitle">TRANSMISSION WILL CONTINUE</p>
-           <p class="score">{{ decodePoints }} CREDITS</p>
-           <button class="view" v-on:click="goSummary">view mission summary</button>
-       </div>
+        <div class="wrapper">
+            <div class="content">
+                <p class="title">SUCCESS</p>
+                <p class="subtitle">SEMANTIC PRESERVATION CONFIRMED</p>
+                <p class="subtitle">TRANSMISSION WILL CONTINUE</p>
+                <p class="score">{{ decodePoints }} CREDITS</p>
+                <button class="view" v-on:click="goSummary">view mission summary</button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -28,6 +30,15 @@ export default {
 
 <style lang="less" scoped>
 .root {
+    background-image: url("../img/success.jpg");
+    background-size: cover;
+    min-height: 100vh;
+}
+.wrapper {
+    background-color: rgba(140, 110, 92, 0.9);
+    width: 100%;
+    height: 100%;
+    margin: 0;
     display: flex;
     justify-content: center;
     min-height: 100vh;

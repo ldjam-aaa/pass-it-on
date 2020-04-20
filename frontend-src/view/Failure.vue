@@ -1,11 +1,13 @@
 <template>
     <div class="root">
-       <div class="content">
-           <p class="title">FAILURE</p>
-           <p class="subtitle">ALL SUBSEQUENT TRANSMISSIONS IN HIGH RISK</p>
-           <p class="subtitle">MESSAGE PERMANENTLY DESTROYED</p>
-           <button class="view" v-on:click="goSummary">view mission summary</button>
-       </div>
+        <div class="wrapper">
+            <div class="content">
+                <p class="title">FAILURE</p>
+                <p class="subtitle">ALL SUBSEQUENT TRANSMISSIONS IN HIGH RISK</p>
+                <p class="subtitle">MESSAGE PERMANENTLY DESTROYED</p>
+                <button class="view" v-on:click="goSummary">view mission summary</button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -22,11 +24,8 @@ export default {
 
 <style lang="less" scoped>
 .root {
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    align-items: center;
-    flex-direction: column;
+    background-image: url('../img/failure.jpg');
+    background-size: cover;
 }
 .content {
     max-width: 800px;
@@ -34,6 +33,18 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.wrapper {
+    background-color: rgba(140, 110, 92, 0.9);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
 }
 
 .title {
