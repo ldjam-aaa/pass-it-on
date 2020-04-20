@@ -1,6 +1,7 @@
 import {CONSTANTS, Game} from '../../../db';
 import { checkParams } from "../../../helpers";
 import config from "../../../config";
+import levenshtein from 'fast-levenshtein';
 
 export default async (req, res) => {
     // Validate request
@@ -13,11 +14,12 @@ export default async (req, res) => {
         res.status(400).send();
         return;
     }
-    const newPhrase = req.body.phrase;
+    let newPhrase = req.body.phrase;
     const game_id = req.params.game_id;
     if (!checkParams(res, 400, newPhrase, game_id)) {
         return;
     }
+    newPhrase = newPhrase.trim();
 
     // Find the associated game
     const game = await Game.findOne({
@@ -41,9 +43,36 @@ export default async (req, res) => {
         return;
     }
 
+    const phrasesInGame = await game.getPhrases({
+        order: [
+            ['id', 'DESC'],
+        ],
+        limit: 1,
+    }).catch(() => undefined);
+
+    if (!phrasesInGame) {
+        res.status(500).send();
+    }
+
+    const lastPhrase = phrasesInGame[0].content;
+
+    // Allowed phrase checks
+    if (!validPhrase(newPhrase, lastPhrase)) {
+        res.status(400).json({
+            "valid": false,
+        })
+    }
+
+    // Find points for this phrase
+    const levenshteinPoints = Math.min(levenshtein.get(newPhrase, lastPhrase), config.game.maxLevenshteinPointsPerPhrase);
+    const noIdenticalWordsPoints = identicalWords(newPhrase, lastPhrase) ? 0 : config.game.noIdenticalWordsPoints;
+    const sameNumWordsPoints = newPhrase.split(" ").length === lastPhrase.split(" ").length ? config.game.sameNumWordsPoints : 0;
+    const points = levenshteinPoints + noIdenticalWordsPoints + sameNumWordsPoints;
+
     // Create the phrase
     const phrase = await game.createPhrase({
-        content: newPhrase
+        content: newPhrase,
+        score: points,
     }).catch(() => {
         res.status(500).send();
     });
@@ -53,5 +82,51 @@ export default async (req, res) => {
     game.increment('phraseCount');
     phrase.setUser(user);
     user.addGame(game);
-    res.send(phrase);
+    user.increment('score', {
+        by: points,
+    });
+    res.json({
+        valid: true,
+        score: {
+            "Levenshtein distance": levenshteinPoints,
+            "No identical words": noIdenticalWordsPoints,
+            "No added words": sameNumWordsPoints,
+        },
+    });
+}
+
+/**
+ *
+ * @param {String} phrase
+ * @param {String} givenPhrase
+ * @return {boolean}
+ */
+function identicalWords(phrase, givenPhrase) {
+    const phraseArr = phrase.split(" ");
+    const givenPhraseArr = givenPhrase.split(" ");
+    for(let word of phraseArr) {
+        if(givenPhraseArr.includes(word)) {
+            return false
+        }
+    }
+    return true
+}
+
+/**
+ *
+ * @param {String} phrase
+ * @param {String} lastPhrase
+ * @returns {boolean}
+ */
+function validPhrase(phrase, lastPhrase) {
+    // Check not identical
+    if (phrase === lastPhrase) {
+        return false;
+    }
+
+    if (phrase.split(" ").length < lastPhrase.split(" ")) {
+        return false;
+    }
+
+    return true;
 }

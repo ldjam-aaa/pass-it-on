@@ -3,7 +3,7 @@
     <div class="overlay">
       <p class="title">INK WILL AUTO-VAPORIZE IN:</p>
       <div class="timer">
-        <countdown 
+        <countdown
           :end-time="new Date().getTime() + 60000"
           v-on:finish="endTimer"
         >
@@ -16,10 +16,12 @@
     <div class="root">
       <div class="content">
         <p class="title prompt">DECODED MESSAGE:</p>
-        <p class="title">{{this.givenPhrase.content}}</p>
+        <p class="title">{{givenPhrase.content}}</p>
         <div class="subtitle">Rephrase this message in no less than 7 words</div>
-        <input type="text" class="phrase" placeholder="This is the phrase that you will be writing" v-model="phrase"/>
-        <button class="confirm" v-on:click="submitPhrase" :disabled="!isValidPhrase">confirm message</button>
+        <form @submit.prevent="submitPhrase">
+          <input type="text" class="phrase" :placeholder="givenPhrase.content" v-model="phrase"/>
+          <input type="submit" class="confirm" :value=" isValidPhrase? 'confirm message' : 'message invalid'" />
+        </form>
         <p class="subtitle info">
         <strong>additional espionage credit will be awarded to agents who</strong>
         <br>
@@ -59,14 +61,20 @@ export default {
       this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
     },
     async submitPhrase() {
+      if (!this.isValidPhrase) {
+        return;
+      }
       const reqBody = {
         phrase: this.phrase
-      }
+      };
 
       try {
         const res = await Axios.post(`/api/game/one/${this.$route.params.game_id}/submitphrase`, reqBody);
+        if (res.status !== 200) {
+          throw new Error();
+        }
         sound.stop()
-        this.$router.push({ name: 'Results', params: { game_id: this.$route.params.game_id, givenPhrase: this.givenPhrase, phrase: this.phrase } })
+        this.$router.push({ name: 'Results', params: { game_id: this.$route.params.game_id, givenPhrase: this.givenPhrase, phrase: this.phrase, points: res.data.score } })
       } catch (err) {
         sound.stop()
         this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
@@ -75,31 +83,24 @@ export default {
     }
   },
   computed: {
-    isValidPhrase: function () { 
-      return this.phrase.split(" ").length >= this.givenPhrase.content.split(" ").length;
+    isValidPhrase: function () {
+      return this.phrase.trim().split(" ").length >= this.givenPhrase.content.trim().split(" ").length;
     }
   },
-  data() { 
-    return { 
+  data() {
+    return {
       phrase: "",
       givenPhrase: {content: "", id: -1}
-    }; 
-  }, 
-  async mounted() { 
+    };
+  },
+  async mounted() {
     sound.play()
 
-    const res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/getphrase`); 
-    if (res.status === 200) { 
+    const res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/getphrase`);
+    if (res.status === 200) {
       this.givenPhrase = res.data.phrase;
     }
-
-
-    
-
-
-  }
-
-
+  },
 };
 </script>
 
@@ -199,7 +200,13 @@ export default {
 
 }
 
-button {
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%
+}
+
+.confirm {
     border: none;
     background: transparent;
     font-family: 'Noto Serif JP', serif;
@@ -214,6 +221,7 @@ button {
     color: #F9EAE1;
     margin-top: 30px;
     margin-bottom: 50px;
+    margin: 30px auto 50px auto;
     cursor: pointer;
 }
 </style>

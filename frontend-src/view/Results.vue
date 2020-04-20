@@ -7,19 +7,12 @@
 
         <p class="subsubtitle rewardPrompt">extra credit awarded:</p>
         <div class="rewards">
-            <div class="reward">
-                <p class="subsubtitle">Levenshtein Distance</p>
-                <p class="subtitle">+300</p>
+            <div v-for="(value, key) in points" class="reward">
+                <template v-if="value !== 0">
+                  <p class="subsubtitle">{{ key }}</p>
+                  <p class="subtitle">+{{ value }}</p>
+                </template>
             </div>
-            <div class="reward" v-if="noIdenticalWords()">
-                <p class="subsubtitle">No identical words</p>
-                <p class="subtitle">+300</p>
-            </div>
-            <div class="reward" v-if="sameNumWords()">
-                <p class="subsubtitle">No added words</p>
-                <p class="subtitle">+300</p>
-            </div>
-
         </div>
         <p class="subsubtitle">
         headquarters rewards agents with the skill to decode obfuscation
@@ -44,23 +37,10 @@ export default {
     decode() {
       this.$router.push({name:"Decode", params: this.$route.params})
     },
-    sameNumWords() {
-      const givenPhraseArr = this.$route.params.givenPhrase.content.split(" ") 
-      const phraseArr = this.$route.params.phrase.split(" ")
-
-      return givenPhraseArr.length == phraseArr.length
-    },
-    noIdenticalWords() {
-      const givenPhraseArr = this.$route.params.givenPhrase.content.split(" ") 
-      const phraseArr = this.$route.params.phrase.split(" ")
-
-      for(let word of phraseArr) {
-        if(givenPhraseArr.includes(word)) {
-          return false
-        }
-      }
-
-      return true
+  },
+  computed: {
+    points() {
+      return this.$route.params.points;
     }
   }
 };
