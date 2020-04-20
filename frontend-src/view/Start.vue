@@ -71,6 +71,7 @@ export default {
   data() { 
     return { 
       phrase: "",
+      givenPhrase: {content: "", id: -1}
     }; 
   }, 
   async mounted() { 
