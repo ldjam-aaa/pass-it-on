@@ -62,9 +62,26 @@ const Phrase = sequelize.define('phrase', {
 });
 
 // define associations
-User.hasMany(Phrase);
-User.hasMany(Game);
+const GameUsers = sequelize.define('GameUsers', {
+  gameId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Game,
+      key: 'id',
+    },
+  },
+  userUuid: {
+    type: DataTypes.UUID,
+    references: {
+      model: User,
+      key: 'uuid'
+    }
+  }
+});
+Game.belongsToMany(User, { through: 'GameUsers' });
+User.belongsToMany(Game, { through: 'GameUsers' });
 
+User.hasMany(Phrase);
 Game.hasMany(Phrase);
 
 Phrase.belongsTo(Game);
@@ -79,5 +96,6 @@ export {
   User,
   Game,
   Phrase,
+  GameUsers,
   CONSTANTS,
 };

@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 
-import { Game, CONSTANTS } from '../../db';
+import { GameUsers, Game, CONSTANTS } from '../../db';
 import randomPhrase from "../../phrases";
 
 export default async (req, res) => {
@@ -11,10 +11,10 @@ export default async (req, res) => {
         return;
     }
 
-    const possibleGames = await Game.findAll({
+    const possibleGames = await GameUsers.findAll({
       where: {
-        state: {
-          [Op.eq]: CONSTANTS.GAME.STATE.STARTED,
+        userUuid: {
+          [Op.ne]: user.uuid,
         },
       },
       limit: 10,
@@ -22,7 +22,7 @@ export default async (req, res) => {
         res.status(500).send('no active games');
     });
 
-    if (!possibleGames){
+    if (!possibleGames || possibleGames.length == 0){
       res.status(500).send('no active games');
       return;
     }
