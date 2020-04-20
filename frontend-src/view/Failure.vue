@@ -4,14 +4,19 @@
            <p class="title">FAILURE</p>
            <p class="subtitle">ALL SUBSEQUENT TRANSMISSIONS IN HIGH RISK</p>
            <p class="subtitle">MESSAGE PERMANENTLY DESTROYED</p>
-           <button class="view">view mission summary</button>
+           <button class="view" v-on:click="goSummary">view mission summary</button>
        </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Failure"
+    name: "Failure",
+    methods: {
+        goSummary() {
+            this.$router.push({ name: 'Continue', params: { game_id: this.$route.params.game_id } });
+        }
+    }
 }
 </script>
 

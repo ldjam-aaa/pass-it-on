@@ -5,14 +5,19 @@
            <p class="subtitle">SEMANTIC PRESERVATION CONFIRMED</p>
            <p class="subtitle">TRANSMISSION WILL CONTINUE</p>
            <p class="score">+100000 CREDITS</p>
-           <button class="view">view mission summary</button>
+           <button class="view" v-on:click="goSummary">view mission summary</button>
        </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Success"
+    name: "Success",
+    methods: {
+        goSummary() {
+            this.$router.push({ name: 'Continue', params: { game_id: this.$route.params.game_id } });
+        }
+    }
 }
 </script>
 
