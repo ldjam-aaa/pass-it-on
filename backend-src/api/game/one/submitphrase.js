@@ -106,10 +106,10 @@ function identicalWords(phrase, givenPhrase) {
     const givenPhraseArr = givenPhrase.split(" ");
     for(let word of phraseArr) {
         if(givenPhraseArr.includes(word)) {
-            return false
+            return true
         }
     }
-    return true
+    return false
 }
 
 /**
