@@ -23,6 +23,7 @@ export default async (req, res) => {
   }
 
   const phrases = await user.getPhrases().catch(() => undefined);
+  const games = await user.getGames().catch(() => undefined);
 
   const numberOfPhrases = await user
     .getPhrases({
@@ -57,6 +58,7 @@ export default async (req, res) => {
     score: user.score,
     uuid: user.uuid,
     phrases: phrases,
+    games: games,
     numberOfPhrases: numberOfPhrases[0].dataValues.count,
     numberOfGames: numberOfGames[0].dataValues.count,
     numberOfActiveGames: numberOfActiveGames[0].dataValues.count

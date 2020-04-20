@@ -13,7 +13,7 @@ export default {
 <style lang="less" scoped>
 
 #app {
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     background-color: #8C6E5C;
 }

@@ -1,41 +1,69 @@
 <template>
-  <div>
-    <div class="header">
-      <p>{{ userStats ? userStats.username : "LOOKS LIKE YOU AREN'T SIGNED IN" }}</p>
-    </div>
-    <div class="stats">
-      <div class="global-stats">
-        <div class="stat-box">
-          <p>GLOBAL OBFUSCATIONS</p>
-          <p> {{ globalStats ? globalStats.numberOfGames : 0 }}</p>
+  <div class="root">
+    <div class="content">
+      <div class="header">
+        <p>{{ userStats ? userStats.username : "LOOKS LIKE YOU AREN'T SIGNED IN" }}</p>
+      </div>
+      <div class="stats">
+        <div class="global-stats">
+          <div class="stat-box">
+            <p>GLOBAL OBFUSCATIONS</p>
+            <p>{{ globalStats ? globalStats.numberOfGames : 0 }}</p>
+          </div>
+          <div class="stat-box">
+            <p>GLOBAL ACTIVE CHANNELS</p>
+            <p>{{ globalStats ? globalStats.numberOfActiveGames : 0 }}</p>
+          </div>
         </div>
-        <div class="stat-box">
-          <p>GLOBAL ACTIVE CHANNELS</p>
-          <p> {{ globalStats ? globalStats.numberOfActiveGames : 0 }}</p>
+        <div class="user-stats">
+          <div class="stat-box">
+            <p>YOUR OBFUSCATIONS</p>
+            <p>{{ userStats ? userStats.numberOfPhrases : 0 }}</p>
+          </div>
+          <div class="stat-box">
+            <p>YOUR ACTIVE CHANNELS</p>
+            <p>{{ userStats ? userStats.numberOfActiveGames : 0 }}</p>
+          </div>
+          <div class="stat-box">
+            <p>ESPIONAGE CREDIT</p>
+            <p>{{ userStats ? userStats.score : 0 }}</p>
+          </div>
         </div>
       </div>
-      <div class="user-stats">
-        <div class="stat-box">
-          <p>YOUR OBFUSCATIONS</p>
-          <p>{{ userStats ? userStats.numberOfPhrases : 0 }}</p>
-        </div>
-        <div class="stat-box">
-          <p>YOUR ACTIVE CHANNELS</p>
-          <p> {{ userStats ? userStats.numberOfActiveGames : 0 }}</p>
-        </div>
-        <div class="stat-box">
-          <p>ESPIONAGE CREDIT</p>
-          <p>{{ userStats ? userStats.score : 0 }}</p>
-        </div>
-      </div>
-    </div>
 
-    <button @click="startGame" :disabled="loadingGame">Start Game</button>
+      <button @click="startGame" :disabled="loadingGame">pass on a new message</button>
+      <hr>
+    </div>
+    
+    <div class="games" v-if="userStats">
+      <div class="game" v-for="game in userStats.games.filter(e => e.id in gamePhrases)" :key="game.id">
+        <h1>"{{gamePhrases[game.id][gamePhraseIdx[game.id]].content}}"</h1>
+        <div class="timeline">
+          <!-- <div  class="timeline"> -->
+          <p v-on:click="setIndex(game.id,gamePhrases[game.id].map(e => e.id).indexOf(phrase.id))" v-for="phrase in gamePhrases[game.id]" :class="gamePhrases[game.id][gamePhraseIdx[game.id]].id === phrase.id ? 'icon' : 'icon disabled'" :key="phrase.id">⬤</p>
+          <!-- </div> -->
+        </div>
+        <p class="info">
+          This phrase has been passed along by <strong>{{gamePhrases[game.id].length-1}}</strong> people!
+          <br><br>
+          The original phrase was:  <strong>“{{gamePhrases[game.id][0].content}}”</strong>
+          <br>
+          The latest phrase was: <strong>“{{gamePhrases[game.id][gamePhrases[game.id].length-1].content}}”</strong>
+          
+
+        </p>
+        
+        
+
+
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Axios from "axios";
+
 export default {
   name: "Dashboard",
   data() {
@@ -44,29 +72,23 @@ export default {
       userStats: null,
       error: null,
       loadingGame: false,
-
+      gamePhrases: {},
+      gamePhraseIdx: {},
     };
   },
   methods: {
+    setIndex(id, index) {
+      this.gamePhraseIdx[id] = index;
+    },
     async startGame() {
       this.loadingGame = true;
       try {
-        
         const res = await Axios.post("/api/game/create");
         this.loadingGame = false;
 
-
-
-        
-
-
         const game_id = res.data.id;
-        this.$router.push({name: "Start", params: {game_id}})
-
-      } catch (err) {
-
-      }
-
+        this.$router.push({ name: "Start", params: { game_id } });
+      } catch (err) {}
     }
   },
   async mounted() {
@@ -85,11 +107,42 @@ export default {
     } else {
       this.error = "No user stats found";
     }
+
+    if (this.userStats.games) {
+      const ids = this.userStats.games.map(e => e.id);
+      for (const id of ids) {
+        const gameRes = await Axios.get(
+          "/api/game/one/" + id + '/getallphrases'
+        );
+        // this.gamePhrases[id] = gameRes.data;
+        gameRes.data = gameRes.data.slice(-10);
+        this.$set(this.gamePhrases, id, gameRes.data);
+        this.$set(this.gamePhraseIdx, id, gameRes.data.length-1);
+      }
+    }
+    
+    
   }
 };
 </script>
 <style lang="less" scoped>
-.header{
+.root {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  max-width: 100%;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 1000px;
+  width: 100%;
+  font-family: "Noto Serif JP", serif;
+}
+.header {
   color: white;
   font-family: Open Sans Condensed;
   font-style: normal;
@@ -106,10 +159,10 @@ export default {
   font-size: 32px;
   text-align: center;
 
-  color: #FEB32B;
+  color: #feb32b;
   margin: 0%;
 
-  @media (max-width: 1200px){
+  @media (max-width: 1200px) {
     font-size: 24px;
   }
 }
@@ -129,5 +182,97 @@ export default {
 p {
   margin: 0;
   padding: 0;
+}
+button {
+  margin-top: 10px;
+
+  border: none;
+  background: transparent;
+  font-family: "Noto Serif JP", serif;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 38px;
+  line-height: 55px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-decoration-line: underline;
+
+  color: #f9eae1;
+  cursor: pointer;
+}
+.icon {
+    font-size: 40px;
+    color: #feb32b;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 15px;
+    cursor: pointer;
+}
+
+.disabled {
+    color: #F9EAE1;
+}
+.timeline {
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url('../img/traintrack.png');
+  // background: url('../img/traintrack.png') no-repeat center center fixed; 
+  // background-size: cover;
+  // object-fit: cover;
+  background-position: center;
+  width: 100%;
+}
+.games {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 800px;
+  width: 100%;
+  font-family: "Noto Serif JP", serif;
+  
+}
+.game {
+  margin-top: 75px;
+  margin-bottom: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  h1 {
+    font-family: "Noto Serif JP", serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+
+    color: #F9EAE1;
+  }
+  .info {
+    font-family: "Noto Serif JP", serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 27px;
+
+    color: #F9EAE1;
+    text-align: left;
+    width: 100%;
+  }
+}
+
+hr {
+  margin-top: 100px;
+  
+  width: 800px;
+  max-width: 95vw;
+  overflow: hidden;
+  align-self: center;
+
 }
 </style>
