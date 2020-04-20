@@ -18,7 +18,7 @@ export default async (req, res) => {
         return;
     }
 
-    // Make sure the user is not in the game
+    // get game instance
     const game = await Game.findOne({
         where: {
             id: game_id,
@@ -28,18 +28,6 @@ export default async (req, res) => {
     });
     if (!game) {
         res.status(404).send();
-        return;
-    }
-    const user_in_game = await user.hasGame(game).catch(() => {
-        res.send(500).send();
-    });
-    if (typeof user_in_game !== 'boolean') {
-        return;
-    }
-    if (user_in_game) {
-        res.send(401).json({
-            error: "User has participated in this game",
-        });
         return;
     }
 

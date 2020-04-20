@@ -20,7 +20,7 @@ export default async (req, res) => {
         return;
     }
 
-    // Make sure the user is not in the game
+    // get game instance
     const game = await Game.findOne({
         where: {
             id: game_id,
@@ -30,18 +30,6 @@ export default async (req, res) => {
     });
     if (!game) {
         res.status(404).send();
-        return;
-    }
-    const user_in_game = await user.hasGame(game).catch(() => {
-        res.send(500).send();
-    });
-    if (typeof user_in_game !== 'boolean') {
-        return;
-    }
-    if (user_in_game) {
-        res.send(401).json({
-            error: "User has participated in this game",
-        });
         return;
     }
 
@@ -60,7 +48,10 @@ export default async (req, res) => {
     await user.addGame(game).catch(() => {
         res.status(500).send();
     });
-
+    console.log(submitted_phrase);
+    console.log(phrases[game.firstPhraseId][0]);
+    
+    
     // Check that the user was correct
     const user_correct = phrases[game.firstPhraseId][0] === submitted_phrase;
     if (!user_correct) {

@@ -16,26 +16,20 @@
                 </countdown>
             </p>
 
-            <p class="subtitle">“An extremely fast furry predator leaped across a slothful wolf”</p>
+            <p class="subtitle">“{{phrase.content}}”</p>
             <div class="options">
-                <div class="option">
-                    <p class="subsubtitle">“The quick brown fox jumps over the lazy dog”</p>
-                    <button>A</button>
+                <div class="option" v-for="option in possible" :key="option">
+                    <p class="subsubtitle">{{option}}</p>
+                    <button v-on:click="submitDecode(option)">{{['A','B','C','D','E'][possible.indexOf(option)]}}</button>
                 </div>
-                <div class="option">
-                    <p class="subsubtitle">“The slow round hen flew over the lazy seal”</p>
-                    <button>B</button>
-                </div>
-                <div class="option">
-                    <p class="subsubtitle">“The fast brown fox jumps over the tired wolf”</p>
-                    <button>C</button>
-                </div>
+                
             </div>
        </div>
     </div>
 </template>
 
 <script>
+import Axios from "axios";
 
 import countdown from 'vue-awesome-countdown/src/vue-awesome-countdown.vue'
 
@@ -49,6 +43,38 @@ export default {
         endTimer() {
             this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
         },
+        async submitDecode(option){
+            const reqBody = {
+                phrase: option,
+            };
+            
+            const res = await Axios.post(`/api/game/one/${this.$route.params.game_id}/${this.phrase.id}/submitdecode`, reqBody);
+            
+            if (res.status === 200 && res.data.correct === true) { 
+                this.$router.push({ name: 'Success', params: { game_id: this.$route.params.game_id } });
+                return;
+            }
+            
+            this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } });
+
+        },
+    },
+    data() {
+        return {
+            possible: [],
+            phrase: {
+                id: 0,
+                content: '',
+            },
+        };
+    },
+    async mounted() { 
+        const res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/getdecode`); 
+        
+        if (res.status === 200) { 
+            this.possible = res.data.possible;
+            this.phrase = res.data.phrase;
+        }
     }
 
 }
