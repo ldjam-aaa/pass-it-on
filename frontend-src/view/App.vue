@@ -4,7 +4,7 @@
           <div v-if="musicplaying" title="Pause music">&#9646;&#9646;</div>
           <div v-else title="Resume music">&#9654;</div>
         </div>
-        <div :class="{ gradient: enableGradient, wrapper: true }">
+        <div :class="{ nogradient: !enableGradient, wrapper: true }">
             <router-view />
         </div>
     </div>
@@ -84,7 +84,7 @@ export default {
     margin: 0;
     background: radial-gradient(transparent, #4A2914);
 
-    &.gradient {
+    &.nogradient {
         background: initial;
     }
 }
