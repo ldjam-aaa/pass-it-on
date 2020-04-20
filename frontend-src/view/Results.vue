@@ -187,6 +187,9 @@ button {
   color: #0C1221;
   text-align: center;
   margin: 0;
+  padding-left: 50px;
+  padding-right: 50px;
+
 }
 
 .paper {

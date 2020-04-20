@@ -138,7 +138,7 @@ export default {
 }
 .paper {
   margin: 30px;
-  background-image: url('../img/paper.png');
+  background-image: url('../img/paper_wide.png');
   background-size:100% 100%;
 
   padding: 30px;
