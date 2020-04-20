@@ -176,6 +176,20 @@ export const phrases = [
       "Lizards like shiny rocks, especially if they're slimy",
       "Salamanders like slippery rocks but not slimy ones",
       "Slimy rocks are liked by salamanders but not by newts"
+    ],
+    [
+      "The crow leaves the castle at sunset",
+      "The black bird flies over the village at sunset",
+      "The crow leaves the castle at sunrise",
+      "Crows fly from castles at sunset",
+      "The crow has left the castle. Ready your troops at sunset"
+    ],
+    [
+      "I like bottled water but I do not enjoy mango juice",
+      "I like sparkling water but I do not enjoy orange juice",
+      "I enjoy water but I do not enjoy apple juice",
+      "I like bottled water but I don't like mango juice",
+      "I like drinking water but I don't like drinking lemonade"
     ]
 ];
 
