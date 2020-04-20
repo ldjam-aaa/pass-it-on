@@ -4,7 +4,9 @@
           <div v-if="musicplaying" title="Pause music">&#9646;&#9646;</div>
           <div v-else title="Resume music">&#9654;</div>
         </div>
-        <router-view />
+        <div class="wrapper">
+            <router-view />
+        </div>
     </div>
 </template>
 
@@ -48,16 +50,27 @@ export default {
     background-color: #8C6E5C;
 }
 #music-controls {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 35px;
-  cursor: pointer;
-  user-select: none;
-  padding: 0 5px 5px 5px;
-  font-size: 30px;
-  background-color: #d6c9ab;
-  border-radius: 0 0 0 3px;
-  text-align: center;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 35px;
+    cursor: pointer;
+    user-select: none;
+    padding: 0 5px 5px 5px;
+    font-size: 30px;
+    background-color: #d6c9ab;
+    border-radius: 0 0 0 3px;
+    text-align: center;
 }
+
+</style>
+
+<style>
+  .wrapper {
+    background: radial-gradient(transparent, #4A2914);
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+  }
 </style>
