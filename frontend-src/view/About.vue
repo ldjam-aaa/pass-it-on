@@ -16,6 +16,7 @@
                 </div>
             </div>
             <p><a href="/3rdpartylibraries.txt">3rd Party Libraries</a></p>
+            <p>Music: "Half Mystery" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">http://creativecommons.org/licenses/by/4.0/</a></p>
         </div>
 
     </div>
