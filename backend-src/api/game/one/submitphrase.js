@@ -104,8 +104,8 @@ export default async (req, res) => {
  * @return {boolean}
  */
 function identicalWords(phrase, givenPhrase) {
-    const phraseArr = phrase.split(" ");
-    const givenPhraseArr = givenPhrase.split(" ");
+    const phraseArr = phrase.toLowerCase().split(" ");
+    const givenPhraseArr = givenPhrase.toLowerCase().split(" ");
     for(let word of phraseArr) {
         if(givenPhraseArr.includes(word)) {
             return true
@@ -126,7 +126,7 @@ function validPhrase(phrase, lastPhrase) {
         return false;
     }
 
-    if (phrase.split(" ").length < lastPhrase.split(" ")) {
+    if (phrase.toLowerCase().split(" ").length < lastPhrase.toLowerCase().split(" ")) {
         return false;
     }
 
