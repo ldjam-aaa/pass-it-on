@@ -4,7 +4,7 @@
            <p class="title">SUCCESS</p>
            <p class="subtitle">SEMANTIC PRESERVATION CONFIRMED</p>
            <p class="subtitle">TRANSMISSION WILL CONTINUE</p>
-           <p class="score">+100000 CREDITS</p>
+           <p class="score">{{ decodePoints }} CREDITS</p>
            <button class="view" v-on:click="goSummary">view mission summary</button>
        </div>
     </div>
@@ -17,7 +17,12 @@ export default {
         goSummary() {
             this.$router.push({ name: 'Continue', params: { game_id: this.$route.params.game_id } });
         }
-    }
+    },
+    computed: {
+        decodePoints() {
+            return this.$store.state.config.decodePoints;
+        },
+    },
 }
 </script>
 
