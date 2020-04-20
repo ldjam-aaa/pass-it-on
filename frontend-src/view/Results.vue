@@ -75,7 +75,8 @@ export default {
   flex-direction: column;
 }
 .content {
-  width: 900px;
+  max-width: 900px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -141,23 +142,12 @@ export default {
 .option {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
   min-height: 150px;
   justify-content: space-between;
 }
 
-button {
-  border: none;
-  background: transparent;
-  font-family: Open Sans Condensed;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 70px;
-  line-height: 95px;
-  text-align: center;
-
-  color: #feb32b;
-}
 
 .arrow {
   font-size: 60px;
@@ -179,6 +169,7 @@ button {
   color: #f9eae1;
   margin-top: 30px;
   margin-bottom: 50px;
+  cursor: pointer;
 }
 
 .rewardPrompt {
@@ -193,7 +184,8 @@ button {
 }
 
 .reward {
-    width: 300px;
+    max-width: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
 

@@ -89,7 +89,8 @@ export default {
     flex-direction: column;
 }
 .content {
-    width: 800px;
+    max-width: 800px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -175,5 +176,6 @@ button {
     text-align: center;
 
     color: #FEB32B;
+    cursor: pointer;
 }
 </style>

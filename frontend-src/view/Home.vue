@@ -38,7 +38,8 @@ export default {
 }
 
 .content {
-    width: 700px;
+    max-width: 700px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -94,5 +95,6 @@ button {
     text-decoration-line: underline;
 
     color: #F9EAE1;
+    cursor: pointer;
 }
 </style>

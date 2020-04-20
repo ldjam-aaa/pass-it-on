@@ -71,7 +71,8 @@ export default {
 }
 
 .form {
-  width: 700px;
+  max-width: 700px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }

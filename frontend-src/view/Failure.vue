@@ -24,7 +24,8 @@ export default {
     flex-direction: column;
 }
 .content {
-    width: 800px;
+    max-width: 800px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,6 +74,7 @@ button {
     text-decoration-line: underline;
 
     color: #F9EAE1;
+    cursor: pointer;
 
 }
 </style>

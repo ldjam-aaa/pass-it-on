@@ -131,7 +131,8 @@ export default {
     flex-direction: column;
 }
 .content {
-    width: 800px;
+    max-width: 800px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -196,5 +197,6 @@ button {
     color: #F9EAE1;
     margin-top: 30px;
     margin-bottom: 50px;
+    cursor: pointer;
 }
 </style>
