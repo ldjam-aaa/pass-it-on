@@ -53,7 +53,7 @@ export default {
     position: fixed;
     right: 0;
     top: 0;
-    width: 35px;
+    width: 60px;
     cursor: pointer;
     user-select: none;
     padding: 0 5px 5px 5px;

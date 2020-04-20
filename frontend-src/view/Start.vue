@@ -87,7 +87,8 @@ export default {
   },
   computed: {
     isValidPhrase: function () {
-      return this.phrase.trim().split(" ").length >= this.givenPhrase.content.trim().split(" ").length;
+      return this.phrase.trim() !== this.givenPhrase.content.trim()
+          && this.phrase.trim().toLowerCase().split(" ").length >= this.givenPhrase.content.trim().toLowerCase().split(" ").length;
     }
   },
   data() {
