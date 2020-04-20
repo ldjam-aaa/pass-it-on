@@ -1,10 +1,10 @@
 <template>
-    <div id="app">
+    <div id="app" :class="{ darker: !enableGradient }">
         <div id="music-controls" @click="toggleMusic">
           <div v-if="musicplaying" title="Pause music">&#9646;&#9646;</div>
           <div v-else title="Resume music">&#9654;</div>
         </div>
-        <div class="wrapper">
+        <div :class="{ gradient: enableGradient, wrapper: true }">
             <router-view />
         </div>
     </div>
@@ -14,6 +14,7 @@
 // Set up music
 import music from '../audio/half-mystery.mp3';
 import { Howl } from 'howler';
+import {disableGradientList} from "../router";
 const musicHowl = new Howl({
   src: [music],
   loop: true,
@@ -27,6 +28,7 @@ export default {
     data() {
         return {
             musicplaying: true,
+            enableGradient: true,
         }
     },
     methods: {
@@ -38,7 +40,12 @@ export default {
             }
             this.musicplaying = !this.musicplaying;
         }
-    }
+    },
+    mounted() {
+        this.$router.afterEach(to => {
+            this.enableGradient = !disableGradientList.includes(to.name);
+        });
+    },
 }
 </script>
 
@@ -48,6 +55,10 @@ export default {
     width: 100%;
     min-height: 100vh;
     background-color: #8C6E5C;
+
+    &.darker {
+        background-color: #583723;
+    }
 }
 #music-controls {
     position: fixed;
@@ -65,12 +76,15 @@ export default {
 
 </style>
 
-<style>
-  .wrapper {
-    background: radial-gradient(transparent, #4A2914);
+<style lang="less">
+.wrapper {
     width: 100%;
     height: 100%;
     min-height: 100vh;
     margin: 0;
-  }
+
+    &.gradient {
+        background: radial-gradient(transparent, #4A2914);
+    }
+}
 </style>

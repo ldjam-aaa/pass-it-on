@@ -29,6 +29,12 @@ const routes = [
     { path: '/about', component: About, name: "About" },
 ];
 
+export const disableGradientList = [
+    "Leaderboard",
+    "Dashboard",
+    "About"
+];
+
 const router = new VueRouter({
     routes
 });
