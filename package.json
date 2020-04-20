@@ -13,7 +13,7 @@
     "frontend:build": "npx webpack --progress --config webpack.config.js",
     "frontend:dev": "npx webpack --progress --watch --config webpack.config.js",
     "build": "npm run clean && npm run backend:build && npm run frontend:build",
-    "build:prod": "npm run clean && NODE_ENV=production npm run backend:build && NODE_ENV=production npm run frontend:build",
+    "build:prod": "npm run clean && NODE_ENV=production npm run backend:build && NODE_ENV=production npm run frontend:build -- --no-progress",
     "start": "node dist/index.js"
   },
   "repository": {
