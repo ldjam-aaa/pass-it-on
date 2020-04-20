@@ -70,6 +70,76 @@ export const phrases = [
       "I don't read books but sometimes I watch movies",
       "Whenever I watch a movie, I read the book first",
       "I'm always either reading a book or watching a movie, but I prefer reading books"
+    ],
+    [
+      "Monkeys came and stole my sandwich the other day",
+      "Theives mugged me and took my sandwich",
+      "Monsters stole my lunch last week",
+      "Chimpanzees took my cheese sandwich from me the other day",
+      "Monkeys attacked me and stole my pizza"
+    ],
+    [
+      "Golden geese lay golden eggs but silver geese lay jellybeans",
+      "Golden geese lay golden eggs and silver geese lay silver eggs",
+      "Most geese lay golden eggs but some geese lay jellybeans",
+      "Golden geese lay golden eggs and so do grey geese",
+      "I once saw a golden goose laying a golden egg"
+    ],
+    [
+      "Grandpas can be grouchy except for when they eat gravy",
+      "Grandpas are grouchy unless you feed them good cheese",
+      "My grandpa is so grouchy! He only eats gravy!",
+      "Grandpas can be grouchy except when they watch tv",
+      "Grandpas eat gravy when they're grumpy"
+    ],
+    [
+      "My crazy grandma feeds cookies to her ten cats",
+      "My grandma's ten cats only eat cookies",
+      "My grandma has twenty cats that she bakes cookie for",
+      "My grandmas cookies ate her cats",
+      "Grandmothers, as a rule, have cats and bake cookies"
+    ],
+    [
+      "JavaScript is a good programming language, I swear",
+      "JavaScript is a terrible programming language!",
+      "JavaScript is by far my favorite programming language",
+      "JavaScript has got to be the best programming language",
+      "Java is a very cool programmin language"
+    ],
+    [
+      "Ducks don't dive into ponds unless Dumbo tells them to",
+      "Ducks don't dive into ponds unless they are hungry",
+      "Dumbo commanded some ducks to dive into a pond",
+      "The other day, I saw Dumbo and some ducks in a pond",
+      "Ducks don't drive into ponds unless told by Dumbo to do so"
+    ],
+    [
+      "Ranchers are jolly unless they have border collies",
+      "Ranchers are only jolly if they have dogs",
+      "Ranchers are best friends with their border collies",
+      "Jolly ranchers have jolly border collies",
+      "Only border collies are owned by jolly ranchers"
+    ],
+    [
+      "We despise illogical people and babies are illogical so we despise babies",
+      "We despise babies because they are dumb",
+      "We love babies even though they are illogical",
+      "We despise incoherent people and babies are incoherent so we despise babies",
+      "I don't like babies because they are illogical"
+    ],
+    [
+      "Tigers have stripes and zebras have stripes so tigers are zebras",
+      "Only tigers and zebras have stripes",
+      "Tigers have stripes and cheetahs have spots",
+      "Tigers are jealous of zebras' stripes",
+      "Tigers like zebras because they have stripes"
+    ],
+    [
+      "My friend the lion is throwing a party and he invited all the animals on the savannah",
+      "My friend the lion is throwing a party and he invited the hyenas",
+      "The lion invited me to his party even though I don't live on the savannah",
+      "My friend lion friend is a party animal who parties with all the animals on the savannah",
+      "The lion is throwing a party and inviting all the animals but me"
     ]
 ];
 
