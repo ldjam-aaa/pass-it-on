@@ -7,11 +7,9 @@
 
         <p class="subsubtitle rewardPrompt">extra credit awarded:</p>
         <div class="rewards">
-            <div v-for="(value, key) in points" class="reward">
-                <template v-if="value !== 0">
-                  <p class="subsubtitle">{{ key }}</p>
-                  <p class="subtitle">+{{ value }}</p>
-                </template>
+            <div v-for="(value, key) in points" :key="key" v-if="value !== 0" class="reward">
+                <p class="subsubtitle">{{ key }}</p>
+                <p class="subtitle">+{{ value }}</p>
             </div>
         </div>
         <p class="subsubtitle">

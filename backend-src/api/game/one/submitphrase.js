@@ -64,7 +64,7 @@ export default async (req, res) => {
     }
 
     // Find points for this phrase
-    const levenshteinPoints = Math.min(levenshtein.get(newPhrase, lastPhrase), config.game.maxLevenshteinPointsPerPhrase);
+    const levenshteinPoints = Math.min(levenshtein.get(newPhrase, lastPhrase) * config.game.levenshteinPointsMultiplier, config.game.maxLevenshteinPointsPerPhrase);
     const noIdenticalWordsPoints = identicalWords(newPhrase, lastPhrase) ? 0 : config.game.noIdenticalWordsPoints;
     const sameNumWordsPoints = newPhrase.split(" ").length === lastPhrase.split(" ").length ? config.game.sameNumWordsPoints : 0;
     const points = levenshteinPoints + noIdenticalWordsPoints + sameNumWordsPoints;
