@@ -1,19 +1,22 @@
 <template>
     <div class="root">
-        <h1>ABOUT</h1>
-        <h3>LUDEM DARE 46: KEEP IT ALIVE</h3>
+        <div class="content">
+            <h1>ABOUT</h1>
+            <h3>LUDEM DARE 46: KEEP IT ALIVE</h3>
 
-        <div>
-            <div class="section">
-                <p class="subtitle">THE GAME</p>
-                <p>This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc.</p>
-            </div>
-            <div class="section" id="the-team">
-                <p class="subtitle">THE TEAM</p>
-                <h3 class="author-name">Name</h3> - <a href="https://pio.garykim.dev" rel="noopener">Website link</a>
-                <p>Test test 123</p>
+            <div>
+                <div class="section">
+                    <p class="subtitle">THE GAME</p>
+                    <p>This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc. This is where we say nice things about how much fun it was to make this, go into excruciatingly painful detail about the entire process etc.</p>
+                </div>
+                <div class="section" id="the-team">
+                    <p class="subtitle">THE TEAM</p>
+                    <h3 class="author-name">Name</h3> - <a href="https://pio.garykim.dev" rel="noopener">Website link</a>
+                    <p>Test test 123</p>
+                </div>
             </div>
         </div>
+        
     </div>
 </template>
 
@@ -26,16 +29,21 @@ export default {
 <style lang="less" scoped>
 .root {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
     min-height: 100vh;
     align-items: center;
+    flex-direction: column;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 80px;
+    width: 100%;
+    font-family: 'Noto Serif JP', serif;
 }
 h1 {
+    font-family: Open Sans Condensed;
     color: #FEB32B;
     font-size: 100px;
     margin: 10px;

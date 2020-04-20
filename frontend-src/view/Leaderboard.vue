@@ -1,27 +1,29 @@
 <template>
   <div class="root">
-    <h1>TOP RANKED AGENTS</h1>
-    <h3>OUR BEST AND BRIGHTEST SPIES</h3>
-    <table>
-      <tr>
-        <th>Rank</th>
-        <th>Player Name</th>
-        <th>Score</th>
-      </tr>
-      <template v-if="players.length === 0">
+    <div class="content">    
+        <h1>TOP RANKED AGENTS</h1>
+        <h3>OUR BEST AND BRIGHTEST SPIES</h3>
+        <table>
         <tr>
-          <td colspan="3">No agents are currently in the database.</td>
+            <th>Rank</th>
+            <th>Player Name</th>
+            <th>Score</th>
         </tr>
-        <tr>
-          <td colspan="3">Become the first and proudly serve our agency!</td>
+        <template v-if="players.length === 0">
+            <tr>
+            <td colspan="3">No agents are currently in the database.</td>
+            </tr>
+            <tr>
+            <td colspan="3">Become the first and proudly serve our agency!</td>
+            </tr>
+        </template>
+        <tr v-for="(player, i) in players" :key="i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ player.username }}</td>
+            <td>{{ player.score }}</td>
         </tr>
-      </template>
-      <tr v-for="(player, i) in players" :key="i">
-        <td>{{ i + 1 }}</td>
-        <td>{{ player.username }}</td>
-        <td>{{ player.score }}</td>
-      </tr>
-    </table>
+        </table>
+    </div>
   </div>
 </template>
 
@@ -46,15 +48,20 @@ export default {
 
 <style lang="less" scoped>
 .root {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+}
+.content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-height: 100vh;
   align-items: center;
   padding-top: 80px;
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  font-family: 'Noto Serif JP', serif;
 }
 h1 {
   color: #feb32b;
@@ -62,7 +69,12 @@ h1 {
   margin: 10px;
   padding: 0;
   overflow: visible;
-  white-space: nowrap;
+  max-width: 100vw;
+  width: 125%;
+  text-align: center;
+//   white-space: nowrap;
+  font-family: Open Sans Condensed;
+  overflow-wrap: break-word;
 }
 h3 {
   color: #f9eae1;
