@@ -4,7 +4,7 @@
       <p class="title">INK WILL AUTO-VAPORIZE IN:</p>
       <div class="timer">
         <countdown
-          :end-time="new Date().getTime() + 60000"
+          :end-time="new Date().getTime() + 600000"
           v-on:finish="endTimer"
         >
           <template v-slot:process="time">
@@ -16,23 +16,26 @@
     <div class="root">
       <div class="content">
         <p class="title prompt">DECODED MESSAGE:</p>
-        <p class="title">{{givenPhrase.content}}</p>
-        <div class="subtitle">Rephrase this message in no less than 7 words</div>
+        <div class="paper">
+          <p class="title input-phrase">{{givenPhrase.content}}</p>
+        </div>
+        
+        <div class="subtitle">Rephrase this message in no less than {{this.givenPhrase.content.trim().split(" ").length}} words</div>
         <form @submit.prevent="submitPhrase">
           <input type="text" class="phrase" :placeholder="givenPhrase.content" v-model="phrase"/>
           <input type="submit" class="confirm" :value=" isValidPhrase? 'confirm message' : 'message invalid'" />
         </form>
-        <p class="subtitle info">
-        <strong>additional espionage credit will be awarded to agents who</strong>
-        <br>
-        - use as few similar words as possible
-        <br>
-        - use no identical words
-        <br>
-        - use exactly as many words as given
-        <br>
-        - use another language
-        </p>
+        <p class="info">
+          <strong>additional espionage credit will be awarded to agents who</strong>
+          <br>
+          - use as few similar words as possible
+          <br>
+          - use no identical words
+          <br>
+          - use exactly as many words as given
+          <br>
+          - use another language
+          </p>
       </div>
     </div>
   </div>
@@ -47,7 +50,7 @@ import tick from '../audio/tick.mp3'
 const sound = new Howl({
   src: [tick],
   loop: true,
-  volume: 0.3
+  volume: 0.0
 });
 
 export default {
@@ -106,7 +109,6 @@ export default {
 
 <style lang="less" scoped>
 .overlay {
-  width: 600px;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -119,20 +121,37 @@ export default {
   font-family: "Noto Serif JP", serif;
   font-style: normal;
   font-weight: 100;
-  font-size: 30px;
+  font-size: 24px;
   line-height: 39px;
   text-align: center;
-
   color: #f9eae1;
   margin: 0;
   margin-top: 20px;
+}
+.input-phrase {
+  padding-left: 70px;
+  padding-right: 70px;
+  margin: 0px;
+  font-weight: 600;
+  color: #0C1221;
+
+}
+.paper {
+  margin: 30px;
+  background-image: url('../img/paper.png');
+  background-size:100% 100%;
+
+  padding: 30px;
+  padding-right: 0px;
+  color: #0C1221;
+
 }
 
 .timer {
   font-family: "Nova Mono", monospace;
   font-style: normal;
   font-weight: normal;
-  font-size: 70px;
+  font-size: 60px;
   line-height: 80px;
   text-align: center;
 
@@ -144,12 +163,13 @@ export default {
 .root {
     display: flex;
     justify-content: center;
-    min-height: 100vh;
     align-items: center;
     flex-direction: column;
+    padding: 20px;
 }
 .content {
-    max-width: 800px;
+    padding-top: 50px;
+    max-width: 1000px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -173,14 +193,24 @@ export default {
 }
 
 .info {
+    margin: 0;
     text-align: left;
     align-self: flex-start;
-    font-weight: 200;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    line-height: 31px;
+    font-weight: 400;
+    background-image: url('../img/notebook.png');
+    padding-left: 80px;
+    padding-top: 29px;
+    padding-bottom: 5px;
+    color: #0C1221;
+
+    width: calc(100% - 80px);
 }
 
-
 .phrase {
-    background: transparent;
+    background: #F9EAE1;
     border: 1px solid #F9EAE1;
     box-sizing: border-box;
     border-radius: 5px;
@@ -193,7 +223,7 @@ export default {
     font-weight: normal;
     font-size: 24px;
     line-height: 33px;
-    color: #F9EAE1;
+    color: #0C1221;
 
     margin: 0;
     margin-top: 50px;
@@ -221,7 +251,7 @@ form {
     color: #F9EAE1;
     margin-top: 30px;
     margin-bottom: 50px;
-    margin: 30px auto 50px auto;
+    margin: 30px auto 30px auto;
     cursor: pointer;
 }
 </style>
