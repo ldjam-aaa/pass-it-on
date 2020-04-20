@@ -15,8 +15,9 @@
                     <p>Test test 123</p>
                 </div>
             </div>
+            <p><a href="/3rdpartylibraries.txt">3rd Party Libraries</a></p>
         </div>
-        
+
     </div>
 </template>
 
@@ -73,10 +74,12 @@ p {
 .section {
     color: #F9EAE1;
 }
+a {
+  color: #c2a2f9;
+}
 #the-team {
     a {
         margin-left: 5px;
-        color: #c2a2f9;
     }
 }
 </style>

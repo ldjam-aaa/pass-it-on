@@ -14,7 +14,8 @@
     "frontend:dev": "npx webpack --progress --watch --config webpack.config.js",
     "build": "npm run clean && npm run backend:build && npm run frontend:build",
     "build:prod": "npm run clean && NODE_ENV=production npm run backend:build && NODE_ENV=production npm run frontend:build -- --no-progress",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "attributions": "yarn licenses --silent generate-disclaimer > frontend-src/static/3rdpartylibraries.txt"
   },
   "repository": {
     "type": "git",
@@ -57,7 +58,6 @@
     "fast-levenshtein": "^2.0.6",
     "howler": "^2.1.3",
     "js-cookie": "^2.2.1",
-    "nes.css": "^2.3.0",
     "sequelize": "^5.21.6",
     "sqlite3": "^4.1.1",
     "typeface-noto-serif-jp": "0.0.75",

@@ -9,6 +9,6 @@ ENV PORT=3000
 
 COPY . .
 
-RUN npm ci && npm run build:prod
+RUN npm ci && npm run attributions && npm run build:prod
 ENTRYPOINT [""]
 CMD ["npm", "start"]
