@@ -1,10 +1,14 @@
 <template>
     <div class="root">
-        <div class="content">
-            <p class="title">PASS IT ON</p>
-            <p class="subtitle">a game of <s>telephone</s></p>
-            <p class="subtitle">international espionage</p>
-            <router-link :to="startRoute"><button class="start">start</button></router-link>
+        <div class="hero">
+          <div class="content">
+              <p class="title">PASS IT ON</p>
+              <p class="subtitle">a game of <s>telephone</s></p>
+              <p class="subtitle">international espionage</p>
+              <router-link :to="startRoute"><button class="start">start</button></router-link>
+          </div>
+
+          <img class="guy" :src="person" width="300" height="400"/>
         </div>
         <div class="links">
             <router-link to="/leaderboard"><button class="link">leaderboard</button></router-link>
@@ -15,6 +19,9 @@
 </template>
 
 <script>
+
+import person from '../img/person.png'
+
 export default {
     name: "Home",
     computed: {
@@ -23,6 +30,10 @@ export default {
                 return "/dashboard"
             }
             return "/signup"
+        },
+
+        person() {
+          return person;
         }
     }
 }
@@ -37,12 +48,19 @@ export default {
     flex-direction: column;
 }
 
+.hero {
+  display: flex;
+  flex-direction: row;
+}
+
 .content {
-    max-width: 700px;
-    width: 100%;
+    width: 600px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url('../img/tape_paper.png');
+    background-size: cover;
 }
 
 .title {
@@ -51,7 +69,8 @@ export default {
     font-weight: bold;
     font-size: 100px;
     line-height: 136px;
-    text-align: center;
+    text-align: left;
+    padding-top: 68px;
 
     color: #FEB32B;
     margin: 0%;
@@ -61,12 +80,12 @@ export default {
 .subtitle {
     font-family: 'Noto Serif JP', serif;
     font-style: normal;
-    font-weight: 200;
+    font-weight: 400;
     font-size: 40px;
     line-height: 54px;
-    text-align: center;
+    text-align: left;
 
-    color: #F9EAE1;
+    color: #A15C5C;
     margin: 0%;
 }
 
@@ -94,7 +113,13 @@ button {
     text-align: center;
     text-decoration-line: underline;
 
-    color: #F9EAE1;
+    color: #0C1221;
     cursor: pointer;
+}
+
+.link {
+  background-image: url('../img/paper.png');
+  background-size: 100% 100%;
+  padding: 10px;
 }
 </style>
