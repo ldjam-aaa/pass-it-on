@@ -46,6 +46,8 @@ import Axios from "axios";
 import countdown from 'vue-awesome-countdown/src/vue-awesome-countdown.vue'
 import { Howl, Howler } from 'howler';
 import tick from '../audio/tick.mp3'
+const Filter = require('bad-words'); 
+const filter = new Filter();
 
 const sound = new Howl({
   src: [tick],
@@ -87,7 +89,8 @@ export default {
   },
   computed: {
     isValidPhrase: function () {
-      return this.phrase.trim() !== this.givenPhrase.content.trim()
+      return !filter.isProfane(this.phrase)
+          && this.phrase.trim() !== this.givenPhrase.content.trim()
           && this.phrase.trim().toLowerCase().split(" ").length >= this.givenPhrase.content.trim().toLowerCase().split(" ").length;
     }
   },
