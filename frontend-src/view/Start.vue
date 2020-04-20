@@ -15,6 +15,8 @@
     </div>
     <div class="root">
       <div class="content">
+        <div class="hand" />
+
         <p class="title prompt">DECODED MESSAGE:</p>
         <div class="paper">
           <p class="title input-phrase">{{givenPhrase.content}}</p>
@@ -257,5 +259,19 @@ form {
     margin-bottom: 50px;
     margin: 30px auto 30px auto;
     cursor: pointer;
+}
+
+.hand {
+  position: absolute;
+  width: 300px;
+  height: 249px;
+
+  left: 6px;
+  top: 123px;
+
+  transform: scalex(-1);
+
+  background: url('../img/hand.png');
+
 }
 </style>
