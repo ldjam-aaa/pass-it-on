@@ -1,9 +1,9 @@
 <template>
   <div class="root">
     <div class="content">
-        <div class="prevPrompt subsubtitle">{{this.$route.params.givenPhrase.content}}</div>
+        <div class="phrase-box subsubtitle">{{this.$route.params.givenPhrase.content}}</div>
         <div class="arrow">↓</div>
-        <div class="currPrompt subtitle">{{this.$route.params.phrase}}</div>
+        <div class="phrase-box subtitle">{{this.$route.params.phrase}}</div>
 
         <p class="subsubtitle rewardPrompt">extra credit awarded:</p>
         <div class="rewards">
@@ -12,14 +12,14 @@
                 <p class="subtitle">+{{ points[key] }}</p>
             </div>
         </div>
-        <p class="subsubtitle">
+        <p class="subsubtitle info">
         headquarters rewards agents with the skill to decode obfuscation
         derive the original message from 3 options for {{ pointsFromDecode }} credits
         </p>
-        <p class="subsubtitle">
+        <p class="subsubtitle info">
         <strong>
             failure to decode will result in immediate nullification of communication chain
-            no points will be gained
+            <br/>no points will be gained
         </strong>
         </p>
 
@@ -92,7 +92,7 @@ export default {
   font-family: "Noto Serif JP", serif;
   font-style: normal;
   font-weight: 200;
-  font-size: 26px;
+  font-size: 22px;
   line-height: 39px;
   text-align: center;
 
@@ -149,7 +149,6 @@ button {
 
   color: #f9eae1;
   margin-top: 30px;
-  margin-bottom: 50px;
   cursor: pointer;
 }
 
@@ -161,7 +160,6 @@ button {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
-    margin-bottom: 50px;
 }
 
 .reward {
@@ -171,4 +169,15 @@ button {
     flex-direction: column;
 
 }
+.phrase-box {
+    padding: 10px 20px 10px 20px;
+    background-color: #F9EAE1;
+    color: #0C1221;
+    border-radius: 5px;
+}
+
+.info {
+  font-size: 18px;
+}
+
 </style>

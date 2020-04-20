@@ -50,7 +50,7 @@ import tick from '../audio/tick.mp3'
 const sound = new Howl({
   src: [tick],
   loop: true,
-  volume: 0.0
+  volume: 0.2
 });
 
 export default {
