@@ -27,6 +27,7 @@ export default async (req, res) => {
         res.status(401).send();
     });
     if (!game) {
+        res.status(400).send('game not found');
         return;
     }
 

@@ -29,6 +29,8 @@
         </div>
       </div>
     </div>
+
+    <button @click="startGame" :disabled="loadingGame">Start Game</button>
   </div>
 </template>
 
@@ -40,8 +42,26 @@ export default {
     return {
       globalStats: null,
       userStats: null,
-      error: null
+      error: null,
+      loadingGame: false,
+
     };
+  },
+  methods: {
+    async startGame() {
+      this.loadingGame = true;
+      try {
+        const res = await Axios.post("/api/game/create");
+        this.loadingGame = false;
+
+        const game_id = res.data.id;
+        this.$router.push({name: "Start", params: {game_id}})
+
+      } catch (err) {
+
+      }
+
+    }
   },
   async mounted() {
     const res = await Axios.get("/api/stats");

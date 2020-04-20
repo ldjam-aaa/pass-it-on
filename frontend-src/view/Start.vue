@@ -2,15 +2,24 @@
   <div>
     <div class="overlay">
       <p class="title">INK WILL AUTO-VAPORIZE IN:</p>
-      <div class="timer">01:00</div>
+      <div class="timer">
+        <countdown 
+          :end-time="new Date().getTime() + 60000"
+          v-on:finish="endTimer"
+        >
+          <template v-slot:process="time">
+            <span>{{ `${time.timeObj.m}:${time.timeObj.s}` }}</span>
+          </template>
+        </countdown>
+      </div>
     </div>
     <div class="root">
       <div class="content">
         <p class="title prompt">DECODED MESSAGE:</p>
-        <p class="title">“This is the phrase that you’re given”</p>
+        <p class="title">{{this.givenPhrase.content}}</p>
         <div class="subtitle">Rephrase this message in no less than 7 words</div>
-        <input type="text" class="phrase" placeholder="This is the phrase that you will be writing"/>
-        <button class="confirm">confirm message</button>
+        <input type="text" class="phrase" placeholder="This is the phrase that you will be writing" v-model="phrase"/>
+        <button class="confirm" v-on:click="submitPhrase" :disabled="!isValidPhrase">confirm message</button>
         <p class="subtitle info">
         <strong>additional espionage credit will be awarded to agents who</strong>
         <br>
@@ -28,8 +37,52 @@
 </template>
 
 <script>
+import Axios from "axios";
+import countdown from 'vue-awesome-countdown/src/vue-awesome-countdown.vue'
+
 export default {
-  name: "Start"
+  name: "Start",
+  components: {
+    countdown
+  },
+  methods: {
+    endTimer() {
+      this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
+    },
+    async submitPhrase() {
+      const reqBody = {
+        phrase: this.phrase
+      }
+
+      try {
+        const res = await Axios.post(`/api/game/one/${this.$route.params.game_id}/submitphrase`, reqBody);
+        this.$router.push({ name: 'Results', params: { game_id: this.$route.params.game_id,  } })
+      } catch (err) {
+        this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
+      }
+
+    }
+  },
+  computed: {
+    isValidPhrase: function () { 
+      return this.phrase.split(" ").length >= this.givenPhrase.content.split(" ").length;
+    }
+  },
+  data() { 
+    return { 
+      phrase: "",
+      givenPhrase: {content: "", id: -1}
+    }; 
+  }, 
+  async mounted() { 
+ 
+    const res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/getphrase`); 
+    if (res.status === 200) { 
+      this.givenPhrase = res.data.phrase;
+    }
+  }
+
+
 };
 </script>
 
