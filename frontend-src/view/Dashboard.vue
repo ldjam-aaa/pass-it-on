@@ -34,7 +34,7 @@
       <button @click="startGame" :disabled="loadingGame">pass on a new message</button>
       <hr>
     </div>
-    
+
     <div class="games" v-if="userStats">
       <div class="game" v-for="game in userStats.games.filter(e => e.id in gamePhrases)" :key="game.id">
         <h1>"{{gamePhrases[game.id][gamePhraseIdx[game.id]].content}}"</h1>
@@ -49,11 +49,11 @@
           The original phrase was:  <strong>“{{gamePhrases[game.id][0].content}}”</strong>
           <br>
           The latest phrase was: <strong>“{{gamePhrases[game.id][gamePhrases[game.id].length-1].content}}”</strong>
-          
+
 
         </p>
-        
-        
+
+
 
 
       </div>
@@ -83,10 +83,10 @@ export default {
     async startGame() {
       this.loadingGame = true;
       try {
-        const res = await Axios.post("/api/game/create");
+        const res = await Axios.post("/api/game/getgame");
         this.loadingGame = false;
 
-        const game_id = res.data.id;
+        const game_id = res.data.game_id;
         this.$router.push({ name: "Start", params: { game_id } });
       } catch (err) {}
     }
@@ -120,8 +120,8 @@ export default {
         this.$set(this.gamePhraseIdx, id, gameRes.data.length-1);
       }
     }
-    
-    
+
+
   }
 };
 </script>
@@ -214,13 +214,13 @@ button {
     color: #F9EAE1;
 }
 .timeline {
-  
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background-image: url('../img/traintrack.png');
-  // background: url('../img/traintrack.png') no-repeat center center fixed; 
+  // background: url('../img/traintrack.png') no-repeat center center fixed;
   // background-size: cover;
   // object-fit: cover;
   background-position: center;
@@ -234,7 +234,7 @@ button {
   max-width: 800px;
   width: 100%;
   font-family: "Noto Serif JP", serif;
-  
+
 }
 .game {
   margin-top: 75px;
@@ -268,7 +268,7 @@ button {
 
 hr {
   margin-top: 100px;
-  
+
   width: 800px;
   max-width: 95vw;
   overflow: hidden;
