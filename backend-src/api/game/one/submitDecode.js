@@ -62,7 +62,9 @@ export default async (req, res) => {
         res.json({
             correct: false,
         });
-
+        //end the game
+        game.set('state', CONSTANTS.GAME.STATE.ENDED);
+        game.save();
         // Remove points from player that gave the phrase for which the submitted phrase was incorrect
         const phraseUser = await phrase.getUser().catch(() => undefined);
         if (!phraseUser) {
