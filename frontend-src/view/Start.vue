@@ -114,7 +114,7 @@ export default {
     isValidPhrase: function () {
       return !filter.isProfane(this.phrase)
           && this.phrase.trim() !== this.givenPhrase.content.trim()
-          && this.phrase.trim().toLowerCase().split(" ").length >= this.givenPhrase.content.trim().toLowerCase().split(" ").length;
+          && this.phrase.trim().toLowerCase().split(" ").length >= 7;
     }
   },
   data() {
