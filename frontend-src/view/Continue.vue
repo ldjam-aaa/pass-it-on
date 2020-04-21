@@ -11,8 +11,6 @@
             <p class="info">
                 This phrase has been passed along by <strong>{{phrases.length-1}}</strong> people!
                 <br>
-                This is the <strong>{{stats.numberOfGamesWithLongerChain+1}}{{['st', 'nd', 'rd', 'th'][Math.min(stats.numberOfGamesWithLongerChain+1,4)-1]}}</strong> longest communications chain.
-                <br><br>
                 The original phrase was:  “{{phrases[0].content}}”
                 <br>
                 The previous phrase was: “{{phrases[phrases.length-2].content}}”
@@ -43,9 +41,12 @@ export default {
             this.$router.push({ name: 'Dashboard' });
         },
         async playAgain() {
-            const res = await Axios.post("/api/game/create");
-            const game_id = res.data.id;
-            this.$router.push({name: "Start", params: {game_id}})
+            try {
+                const res = await Axios.post("/api/game/getgame");
+
+                const game_id = res.data.game_id;
+                this.$router.push({ name: "Start", params: { game_id } });
+            } catch (err) {}
         },
     },
     data() {
