@@ -57,20 +57,22 @@ export default {
         };
     },
     async mounted() { 
-        let res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/getallphrases`); 
-        
-        if (res.status === 200) { 
+
+        try {
+            let res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/getallphrases`); 
+            
             this.phrases = res.data;
             this.index = res.data.length-1;
-        }
-        console.err(res)
+            
 
-        res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/stats`); 
-        
-        if (res.status === 200) { 
+            res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/stats`); 
+            
             this.stats = res.data;
+            
+        } catch(err) {
+            console.error(err);
+            this.$router.push({ name: 'Dashboard' });
         }
-
 
     }
 }
