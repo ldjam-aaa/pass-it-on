@@ -63,7 +63,28 @@ export default {
     countdown
   },
   methods: {
-    endTimer() {
+    async endTimer() {
+      if (this.isValidPhrase) { 
+
+        const reqBody = {
+          phrase: this.phrase
+        };
+
+        try {
+          const res = await Axios.post(`/api/game/one/${this.$route.params.game_id}/submitphrase`, reqBody);
+          if (res.status !== 200) {
+            throw new Error();
+          }
+          sound.stop()
+          this.$router.push({ name: 'Results', params: { game_id: this.$route.params.game_id, givenPhrase: this.givenPhrase, phrase: this.phrase, points: res.data.score } })
+        } catch (err) {
+          sound.stop()
+          this.$router.push({ name: 'Error'})
+        }
+        return; 
+      }
+
+
       sound.stop()
       this.$router.push({ name: 'Failure', params: { game_id: this.$route.params.game_id } })
     },
@@ -190,7 +211,7 @@ export default {
     font-family: 'Noto Serif JP', serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 26px;
     line-height: 23px;
     text-align: center;
 
