@@ -1,8 +1,8 @@
 <template>
     <div id="app" :class="{ darker: !enableGradient }">
         <div id="music-controls" @click="toggleMusic">
-          <div v-if="musicplaying" title="Pause music">&#9646;&#9646;</div>
-          <div v-else title="Resume music">&#9654;</div>
+          <div v-if="musicplaying" title="Pause music">&#128266;</div>
+          <div v-else title="Resume music">&#128264;</div>
         </div>
         <div :class="{ nogradient: !enableGradient, wrapper: true }">
             <router-view />
