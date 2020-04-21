@@ -1,9 +1,12 @@
 <template>
+  <div>
+    <div class="navigation">
+      <button class="home" v-on:click="goHome">Go Home</button>
+    </div>
     <div class="root">
         <div class="content">
             <h1>ABOUT</h1>
             <h3>LUDEM DARE 46: KEEP IT ALIVE</h3>
-
             <div>
                 <div class="section">
                     <p class="subtitle">THE GAME</p>
@@ -38,6 +41,7 @@
           </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -107,8 +111,6 @@ a {
     }
 }
 button {
-    margin-top: 24px;
-
     border: none;
     margin-left: 12px;
     background: transparent;
