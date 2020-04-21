@@ -204,6 +204,13 @@ export const phrases = [
       "The store only had eggs so the programmer was sad",
       "The shop had eggs but no chickens so the programmer bought them",
       "The shop had more than a dozen eggs so the programmer left home"
+    ],
+    [
+      "The mice were sleeping in the barn so the cats came out",
+      "The mice were hiding in the shed",
+      "The rats were sleeping in the sun and the cats came out",
+      "The mice were running from the cats in the barn",
+      "The mice were eating cheese in the barn"
     ]
 ];
 
