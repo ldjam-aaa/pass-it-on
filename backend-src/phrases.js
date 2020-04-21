@@ -190,6 +190,20 @@ export const phrases = [
       "I enjoy water but I do not enjoy apple juice",
       "I like bottled water but I don't like mango juice",
       "I like drinking water but I don't like drinking lemonade"
+    ],
+    [
+      "Llama Island has no llamas",
+      "I was sad because there were no llamas on Llama Island",
+      "Llama Island only has llamas",
+      "Beware of llamas on Llama Island",
+      "Llama Island is the only place in the world with no llamas"
+    ],
+    [
+      "The store had a dozen eggs so the programmer left and did not come home",
+      "The store had a dozen eggs so the programmer bought them",
+      "The store only had eggs so the programmer was sad",
+      "The shop had eggs but no chickens so the programmer bought them",
+      "The shop had more than a dozen eggs so the programmer left home"
     ]
 ];
 
