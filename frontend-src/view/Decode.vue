@@ -7,7 +7,7 @@
             <p class="subsubtitle">INK WILL AUTO-VAPORIZE IN:</p>
             <p class="timer">
                 <countdown 
-                    :end-time="new Date().getTime() + 30000"
+                    :end-time="new Date().getTime() + 60000"
                     v-on:finish="endTimer"
                 >
                     <template v-slot:process="time">
