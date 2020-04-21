@@ -71,7 +71,7 @@ export default {
     line-height: 136px;
     text-align: left;
     padding-top: 68px;
-
+    text-shadow: 0px 4px 2px rgba(0, 0, 0, 0.25);
     color: #FEB32B;
     margin: 0%;
 
