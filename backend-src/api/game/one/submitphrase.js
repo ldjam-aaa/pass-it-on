@@ -126,7 +126,7 @@ function validPhrase(phrase, lastPhrase) {
         return false;
     }
 
-    if (phrase.toLowerCase().split(" ").length < lastPhrase.toLowerCase().split(" ")) {
+    if (phrase.toLowerCase().split(" ").length < 7) {
         return false;
     }
 
