@@ -66,13 +66,10 @@ export default async (req, res) => {
         // Remove points from player that gave the phrase for which the submitted phrase was incorrect
         const phraseUser = await phrase.getUser().catch(() => undefined);
         if (!phraseUser) {
-            res.status(500).send();
-            return;
+            phraseUser.decrement('score', {
+                by: phrase.score,
+            });
         }
-        phraseUser.decrement('score', {
-            by: phrase.score,
-        });
-
         return;
     }
 

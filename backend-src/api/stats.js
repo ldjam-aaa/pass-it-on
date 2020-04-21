@@ -1,4 +1,4 @@
-import { Game, Phrase } from "../db";
+import { CONSTANTS, Game, Phrase } from "../db";
 
 export default async (req, res) => {
     const numberOfGames = await Game.count().catch(() => {
@@ -10,9 +10,7 @@ export default async (req, res) => {
 
     const numberOfActiveGames = await Game.count({
       where: {
-        state: {
-          defaultValue: 2
-        }
+        state: CONSTANTS.GAME.STATE.STARTED,
       }
     }).catch(() => {
         res.status(500).send();
