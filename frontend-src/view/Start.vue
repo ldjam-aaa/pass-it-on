@@ -21,8 +21,8 @@
         <div class="paper">
           <p class="title input-phrase">{{givenPhrase.content}}</p>
         </div>
-        
-        <div class="subtitle">Rephrase this message in no less than {{this.givenPhrase.content.trim().split(" ").length}} words</div>
+
+        <div class="subtitle">Rephrase this message in more than six words</div>
         <form @submit.prevent="submitPhrase">
           <input type="text" class="phrase" :placeholder="givenPhrase.content" v-model="phrase"/>
           <input type="submit" class="confirm" :value=" isValidPhrase? 'confirm message' : 'message invalid'" />
@@ -48,7 +48,7 @@ import Axios from "axios";
 import countdown from 'vue-awesome-countdown/src/vue-awesome-countdown.vue'
 import { Howl, Howler } from 'howler';
 import tick from '../audio/tick.mp3'
-const Filter = require('bad-words'); 
+const Filter = require('bad-words');
 const filter = new Filter();
 
 const sound = new Howl({
@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     async endTimer() {
-      if (this.isValidPhrase) { 
+      if (this.isValidPhrase) {
 
         const reqBody = {
           phrase: this.phrase
@@ -81,7 +81,7 @@ export default {
           sound.stop()
           this.$router.push({ name: 'Error'})
         }
-        return; 
+        return;
       }
 
 
