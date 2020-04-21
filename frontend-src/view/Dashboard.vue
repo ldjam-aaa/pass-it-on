@@ -128,6 +128,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.home {
+  margin-top: 0;
+}
+
 .root {
   display: flex;
   min-height: 100vh;

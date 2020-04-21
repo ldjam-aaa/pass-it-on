@@ -86,6 +86,7 @@ export default {
 
     &.nogradient {
         background: initial;
+        background-color: #8C6E5C;
     }
 }
 </style>
