@@ -62,6 +62,7 @@ export default {
             this.phrases = res.data;
             this.index = res.data.length-1;
         }
+        console.err(res)
 
         res = await Axios.get(`/api/game/one/${this.$route.params.game_id}/stats`); 
         
