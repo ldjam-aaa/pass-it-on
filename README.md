@@ -13,3 +13,5 @@ npm start
 ### License
 
 Copyright (c) 2020 The Pass It On Authors, All Rights Reserved
+
+Licensed under Apache-2.0 license
