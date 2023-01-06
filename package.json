@@ -64,7 +64,7 @@
     "typeface-noto-serif-jp": "0.0.75",
     "typeface-nova-mono": "0.0.72",
     "uuid": "^7.0.3",
-    "vue-awesome-countdown": "^1.0.25",
+    "vue-awesome-countdown": "^1.1.4",
     "vue-cookies": "^1.7.0",
     "vuex": "^3.1.3"
   }
